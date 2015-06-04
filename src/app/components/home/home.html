@@ -1,6 +1,6 @@
 <ion-view view-title="首页" id="HOME">
     <ion-content>
-        <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000">
+        <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000" show-pager="false">
             <ion-slide ng-repeat="banner in banners">
                 <a ng-href="{{ banner.href }}" target="_blank"><img ng-src="{{ banner.src }}" alt="{{ banner.alt }}"></a>
             </ion-slide>
