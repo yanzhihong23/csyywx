@@ -3,12 +3,39 @@
 angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'ionic'])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('home', {
-        url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
-      });
+      .state('tabs', {
+        url: '/tab',
+        abstract: true,
+        templateUrl: 'app/tabs/tabs.html'
+      })
+      .state('tabs.home', {
+	      url: "/home",
+	      views: {
+	        'home-tab': {
+	          templateUrl: "app/components/home/home.html",
+	          controller: 'HomeCtrl'
+	        }
+	      }
+    	})
+    	.state('tabs.buy', {
+	      url: "/buy",
+	      views: {
+	        'buy-tab': {
+	          templateUrl: "app/components/buy/buy.html",
+	          controller: 'BuyCtrl'
+	        }
+	      }
+    	})
+    	.state('tabs.info', {
+	      url: "/info",
+	      views: {
+	        'info-tab': {
+	          templateUrl: "app/components/info/info.html",
+	          controller: 'InfoCtrl'
+	        }
+	      }
+    	})
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/tab/home');
   })
 ;
