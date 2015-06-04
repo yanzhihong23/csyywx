@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('projects')
+angular.module('csyywx')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       {

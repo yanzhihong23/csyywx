@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('projects', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router'])
+angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'ionic'])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
