@@ -1,0 +1,25 @@
+@import "mixin";
+
+.hidden{
+  display: none !important;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.normal{
+  font-weight: normal !important;
+}
+
+.text-left{
+	@include align(left);
+}
+
+.text-right{
+	@include align(right);
+}
+
+.text-center{
+	@include align(center);
+}
