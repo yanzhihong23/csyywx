@@ -1,11 +1,18 @@
-<ion-view view-title="首页">
+<ion-view view-title="首页" id="HOME">
     <ion-content>
-        首页
-        <ion-slide-box>
+        <ion-slide-box does-continue="true" auto-play="true" slide-interval="2000">
             <ion-slide ng-repeat="banner in banners">
-                <img ng-src="banner.src" alt="">
+                <a ng-href="{{ banner.href }}" target="_blank"><img ng-src="{{ banner.src }}" alt="{{ banner.alt }}"></a>
             </ion-slide>
         </ion-slide-box>
+
+        <div class="container assertive">
+            <div class="add-interest-img"><img ng-src="assets/images/add-interest-img.png" alt=""></div>
+            <p class="p1">发工资立存加2% 工薪族首选理财产品</p>
+            <p class="p2">8.88%-13.68%</p>
+            <p class="p3">按天计息，按月存取</p>
+            <button class="button button-outline button-assertive button-large">立即购买</button>
+        </div>
 
     </ion-content>
 </ion-view>
