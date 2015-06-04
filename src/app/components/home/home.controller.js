@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('HomeCtrl', function() {
-		
+	.controller('HomeCtrl', function($scope) {
+		$scope.banners = [{
+			src: 'img/ba'
+		}];
 	})
