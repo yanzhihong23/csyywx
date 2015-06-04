@@ -1,0 +1,3 @@
+@mixin align ($side: center) {
+  text-align: unquote($side);
+}

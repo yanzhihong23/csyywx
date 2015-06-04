@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'ionic'])
-  .config(function ($stateProvider, $urlRouterProvider) {
+	.config(function($ionicConfigProvider) {
+		$ionicConfigProvider.tabs.position('bottom').style('standard');
+	})
+  .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('tabs', {
         url: '/tab',
