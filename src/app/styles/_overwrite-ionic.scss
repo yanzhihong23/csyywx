@@ -1,3 +1,12 @@
+@import "../../bower_components/ionic/scss/ionic";
+
 .tabs-light > .tabs, .tabs.tabs-light{
   border-top: solid 1px #ddd !important;
 }
+
+.tab-item{
+  &.tab-item-active, &.active, &.activated{
+    color: $assertive;
+  }
+}
+
