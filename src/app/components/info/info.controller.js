@@ -2,5 +2,5 @@
 
 angular.module('csyywx')
 	.controller('InfoCtrl', function() {
-		
-	})
+
+	});

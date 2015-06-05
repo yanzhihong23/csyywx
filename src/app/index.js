@@ -13,28 +13,28 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
         templateUrl: 'app/tabs/tabs.html'
       })
       .state('tabs.home', {
-	      url: "/home",
+	      url: '/home',
 	      views: {
 	        'home-tab': {
-	          templateUrl: "app/components/home/home.html",
+	          templateUrl: 'app/components/home/home.html',
 	          controller: 'HomeCtrl'
 	        }
 	      }
     	})
     	.state('tabs.buy', {
-	      url: "/buy",
+	      url: '/buy',
 	      views: {
 	        'buy-tab': {
-	          templateUrl: "app/components/buy/buy.html",
+	          templateUrl: 'app/components/buy/buy.html',
 	          controller: 'BuyCtrl'
 	        }
 	      }
     	})
     	.state('tabs.info', {
-	      url: "/info",
+	      url: '/info',
 	      views: {
 	        'info-tab': {
-	          templateUrl: "app/components/info/info.html",
+	          templateUrl: 'app/components/info/info.html',
 	          controller: 'InfoCtrl'
 	        }
 	      }
