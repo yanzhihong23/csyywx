@@ -17,7 +17,7 @@ var options = {
   },
   wiredep: {
     directory: 'bower_components',
-    exclude: [/jquery/, '/ionic/release/css/ionic.css']
+    exclude: [/jquery/]
   }
 };
 
