@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'ionic'])
+angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'ionic', 'angular-md5', 'LocalStorageModule'])
+	.constant('HOST_URL', 'https://m-test.nonobank.com/nonobank-app')
 	.config(function($ionicConfigProvider) {
 		$ionicConfigProvider.tabs.position('bottom').style('standard');
 	})
