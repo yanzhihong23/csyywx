@@ -38,7 +38,7 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 	        }
 	      }
     	})
-
+			;
     $urlRouterProvider.otherwise('/tab/home');
   })
 ;
