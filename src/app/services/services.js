@@ -5,11 +5,20 @@ angular.module('csyywx')
 		var self = this;
 		var auto = null;
 
-		this.isLogined = false;
+		// this.isLogined = false;
 		this.sessionId;
 
+		this.isLogined = function() {
+			return localStorageService.get('isLogined');
+		};
+
+		this.setLoginStatus = function(isLogined) {
+			localStorageService.add('isLogined', isLogined);
+		};
+
 		this.setUser = function(user, broadcast) {
-			self.isLogined = true;
+			// self.isLogined = true;
+			self.setLoginStatus(true);
 			localStorageService.add('user', user);
 		};
 
@@ -41,7 +50,8 @@ angular.module('csyywx')
 							auto = null;
 							self.logout();
 						} else {
-							self.isLogined = true;
+							// self.isLogined = true;
+							self.setLoginStatus(true);
 							self.setBasicInfo(data.data);
 							if(broadcast) $rootScope.$broadcast('loginSuc');
 							console.log('----------- autoLogin success -----------');

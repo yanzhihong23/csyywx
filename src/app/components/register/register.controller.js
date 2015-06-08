@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-  .controller('RegisterCtrl', function($scope, $state, $stateParams, $ionicLoading, UserApi, userConfig, utils) {
+  .controller('RegisterCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, UserApi, userConfig, utils) {
   	var resendCountdown = utils.resendCountdown($scope);
 
     $scope.user = {
@@ -55,7 +55,7 @@ angular.module('csyywx')
     			});
 
     			$rootScope.$broadcast('loginSuc');
-    			
+
     		} else if(+data.flag === 3) { // invalid vcode
     			$scope.user.invalidVcode = true;
     		}
