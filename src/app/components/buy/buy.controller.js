@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('BuyCtrl', function($scope, UserApi, PayApi) {
+	.controller('BuyCtrl', function($scope, UserApi, PayApi, userConfig) {
+
+		$scope.api = {
+			sessionId: userConfig.getSessionId()
+		};
 
 		// 需要提交的表单数据
 		$scope.form = {
@@ -29,89 +33,9 @@ angular.module('csyywx')
 
 		// 滑块数据
 		$scope.range = {
-			terms: [{
-				term: '7天', // 时间
-				interest: 0.7, // 收益
-				maxAmount: '200000', // 最高投资金额
-				days: 7,
-				increaseRate: 3
-			},{
-				term: '1月',
-				interest: 1,
-				maxAmount: '200000',
-				days: 30,
-				increaseRate: 2
-			},{
-				term: '2月',
-				interest: 2,
-				maxAmount: '200000',
-				days: 61,
-				increaseRate: 2
-			},{
-				term: '3月',
-				interest: 3,
-				maxAmount: '200000',
-				days: 91,
-				increaseRate: 2
-			},{
-				term: '4月',
-				interest: 4,
-				maxAmount: '200000',
-				days: 122,
-				increaseRate: 2
-			},{
-				term: '5月',
-				interest: 5,
-				maxAmount: '200000',
-				days: 152,
-				increaseRate: 2
-			},{
-				term: '6月',
-				interest: 6,
-				maxAmount: '200000',
-				days: 183,
-				increaseRate: 2
-			},{
-				term: '7月',
-				interest: 7,
-				maxAmount: '200000',
-				days: 213,
-				increaseRate: 2
-			},{
-				term: '8月',
-				interest: 8,
-				maxAmount: '500000',
-				days: 244,
-				increaseRate: 2
-			},{
-				term: '9月',
-				interest: 9,
-				maxAmount: '600000',
-				days: 274,
-				increaseRate: 2
-			},{
-				term: '10月',
-				interest: 10,
-				maxAmount: '700000',
-				days: 305,
-				increaseRate: 12
-			},{
-				term: '11月',
-				interest: 11,
-				maxAmount: '800000',
-				days: 335,
-				increaseRate: 2
-			},{
-				term: '12月',
-				interest: 12,
-				maxAmount: '900000',
-				days: 365,
-				increaseRate: 2
-			}]
+			terms: []
 		};
-		//$scope.range = {
-		//	terms: []
-		//};
+
 		//
 		var Func = {
 
@@ -194,14 +118,40 @@ angular.module('csyywx')
 				$scope.other.minAmount = +data.productRule.investAmountMin;
 				$scope.other.isSetSalaryDay = data.isSetSalaryDay;
 				$scope.other.isBetweenSalaryDate = data.isBetweenSalaryDate;
+			},
+
+			watches: function() {
+				$scope.$watch('form.term', function() {
+					var len = $scope.range.terms.length;
+					var term = $scope.form.term;
+					$scope.other.level = (Math.abs(term-100/len/2)/100*len).toFixed(0);
+
+					Func.changeLeft();
+				});
+				$scope.$watch('other.level', function() {
+					Func.changeTerm();
+					Func.changeInterest();
+					Func.changeMaxAmount();
+					Func.changeBack();
+				});
+
+				$scope.$watch('form.amount', function() {
+					if ($scope.form.amount === '') {
+						return;
+					}
+					if (/\.$/.test($scope.form.amount)) {
+						$scope.form.amount.replace(/\.+$/, '.');
+						return;
+					}
+
+					Func.changeBack();
+
+					Func.checkAmount();
+				});
 			}
 
 		};
 
-
-		$scope.api = {
-			sessionId: ''
-		};
 
 		PayApi.getProductCode({sessionId: ''})
 			.success(function(data) {
@@ -214,6 +164,7 @@ angular.module('csyywx')
 							if (+data.flag === 1) {
 								Func.monthRates(data.data.monthRates);
 								Func.otherData(data.data);
+								Func.watches();
 							}
 
 						})
@@ -222,36 +173,6 @@ angular.module('csyywx')
 			})
 		;
 
-
-
-
-		$scope.$watch('form.term', function() {
-			var len = $scope.range.terms.length;
-			var term = $scope.form.term;
-			$scope.other.level = (Math.abs(term-100/len/2)/100*len).toFixed(0);
-
-			Func.changeLeft();
-		});
-		$scope.$watch('other.level', function() {
-			Func.changeTerm();
-			Func.changeInterest();
-			Func.changeMaxAmount();
-			Func.changeBack();
-		});
-
-		$scope.$watch('form.amount', function() {
-			if ($scope.form.amount === '') {
-				return;
-			}
-			if (/\.$/.test($scope.form.amount)) {
-				$scope.form.amount.replace(/\.+$/, '.');
-				return;
-			}
-
-			Func.changeBack();
-
-			Func.checkAmount();
-		});
 
 		$scope.inputBlur = function() {
 			if ($scope.form.amount < $scope.other.minAmount && $scope.form.amount !== '') {
