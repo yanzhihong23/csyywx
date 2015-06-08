@@ -23,3 +23,22 @@
 .text-center{
 	@include align(center);
 }
+
+.pull-left {
+  float: left!important;
+}
+
+.pull-right {
+  float: right!important;
+}
+
+.clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}

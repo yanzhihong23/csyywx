@@ -1,5 +1,32 @@
-<ion-view view-title="购买">
+<ion-view view-title="购买" id="BUY">
 	<ion-content>
-		购买
+		<div class="content-block-inner">
+			<p class="step1">1.期限及利率</p>
+			<div class="item range range-assertive">
+				<!--<i class="icon ion-volume-low"></i>-->
+				<input type="range" name="term" min="1" max="99" ng-model="form.term">
+				<!--<i class="icon ion-volume-high"></i>-->
+				<div class="interest assertive"
+						 style="-webkit-transform: translate3d({{ other.left }}, 0, 0);transform: translate3d({{ other.left }}, 0, 0);">{{ other.interest }}%<span ng-class="{ 'hidden': other.isBetweenSalaryDate===0 }">+加息{{ form.increaseRate }}%</span></div>
+			</div>
+			<ul class="terms range">
+				<li ng-repeat="item in range.terms" ng-class="{ 'assertive':item.active }">{{ item.term }}</li>
+			</ul>
+			<a class="underline add-interest text-right assertive padding" ng-class="{ 'hidden': other.isSetSalaryDay===1 }" ng-href="">加息{{ form.increaseRate }}%？设置工资发放日</a>
+			<label class="item item-input step2">
+				<span class="input-label">2.金额</span>
+				<input id="amount" type="text" placeholder="{{ other.minAmount }}元起投 上限&le;{{ other.maxAmount }}" ng-blur="inputBlur()" ng-model="form.amount" max="{{ other.maxAmount }}">
+				<span class="input-label input-add">元</span>
+			</label>
+		</div>
+
+		<div class="content-block-inner padding text-center">
+			<p>预期可收回：<span class="assertive"><span class="big">{{ other.back.int }}</span>{{ other.back.dec }}</span></p>
+			<p>(预期年华收益 {{ other.totalInterest }}%)</p>
+		</div>
+
+		<div class="padding"><a ng-href="" class="button button-block button-assertive">确认支付</a></div>
+
+		<p class="text-center small">确认支付代表您同意此<a class="underline calm" ng-href="">用户协议</a>、<a class="underline calm" ng-href="">服务协议</a>及<a class="underline calm" ng-href="">支付协议</a></p>
 	</ion-content>
 </ion-view>
