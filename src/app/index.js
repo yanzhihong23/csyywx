@@ -7,16 +7,16 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 	})
 	.run(function($state, $rootScope, userConfig, utils) {
 		// try auto login
-		if(!userConfig.isLogined) {
+		if(!userConfig.isLogined()) {
 			userConfig.autoLogin();
 		}
 
 		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-			console.log('sessionId: ' + userConfig.sessionId)
+			console.log('sessionId: ' + userConfig.getSessionId())
 			switch(toState.name) {
 				case 'tabs.buy':
 				case 'tabs.info':
-					if(!userConfig.isLogined) {
+					if(!userConfig.isLogined()) {
 						event.preventDefault();
 
 						var callMeOffFn = $rootScope.$on('loginSuc', function() {
@@ -32,8 +32,9 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 				case 'tabs.phone':
 				case 'tabs.register':
 				case 'tabs.login':
-					if(userConfig.isLogined) {
+					if(userConfig.isLogined()) {
 						event.preventDefault();
+						$state.go('tabs.home');
 						break;
 					}
 

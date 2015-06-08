@@ -5,11 +5,28 @@ angular.module('csyywx')
 		var self = this;
 		var auto = null;
 
-		this.isLogined = false;
-		this.sessionId;
+		// this.isLogined = false;
+		// this.sessionId;
+
+		this.isLogined = function() {
+			return localStorageService.get('isLogined');
+		};
+
+		this.setLoginStatus = function(isLogined) {
+			localStorageService.add('isLogined', isLogined);
+		};
+
+		this.setSessionId = function(sessionId) {
+			localStorageService.add('sessionId', sessionId);
+		};
+
+		this.getSessionId = function() {
+			return localStorageService.get('sessionId');
+		};
 
 		this.setUser = function(user, broadcast) {
-			self.isLogined = true;
+			// self.isLogined = true;
+			self.setLoginStatus(true);
 			localStorageService.add('user', user);
 		};
 
@@ -18,7 +35,8 @@ angular.module('csyywx')
 		};
 
 		this.setBasicInfo = function(info) {
-			self.sessionId = info.sessionId;
+			// self.sessionId = info.sessionId;
+			self.setSessionId(info.sessionId);
 			localStorageService.add('basicInfo', info);
 		};
 
@@ -28,6 +46,7 @@ angular.module('csyywx')
 
 		this.logout = function() {
 			localStorageService.remove('basicInfo');
+			localStorageService.remove('sessionId');
 			localStorageService.remove('user');
 			// localStorageService.clearAll();
 		};
@@ -41,7 +60,8 @@ angular.module('csyywx')
 							auto = null;
 							self.logout();
 						} else {
-							self.isLogined = true;
+							// self.isLogined = true;
+							self.setLoginStatus(true);
 							self.setBasicInfo(data.data);
 							if(broadcast) $rootScope.$broadcast('loginSuc');
 							console.log('----------- autoLogin success -----------');
