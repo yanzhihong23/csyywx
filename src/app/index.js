@@ -39,7 +39,16 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 					}
 
 			}
-		})
+		});
+
+		$rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+      if(!/tabs.home|tabs.info|tabs.buy/.test(toState.name)) {
+        angular.element(document.querySelector('.tab-nav.tabs')).addClass('hidden');
+      } else {
+        angular.element(document.querySelector('.tab-nav.tabs')).removeClass('hidden');
+      }
+    });
+
 	})
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -103,6 +112,31 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 	          controller: 'LoginCtrl'
 	        }
 	      }
+    	})
+    	/************************** buy tab ***************************/
+    	.state('tabs.userAgreement', {
+    		url: '/userAgreement',
+    		views: {
+    			'buy-tab': {
+    				templateUrl: 'app/components/agreements/user-agreement.html'
+    			}
+    		}
+    	})
+    	.state('tabs.serviceAgreement', {
+    		url: '/serviceAgreement',
+    		views: {
+    			'buy-tab': {
+    				templateUrl: 'app/components/agreements/service-agreement.html'
+    			}
+    		}
+    	})
+    	.state('tabs.payAgreement', {
+    		url: '/payAgreement',
+    		views: {
+    			'buy-tab': {
+    				templateUrl: 'app/components/agreements/pay-agreement.html'
+    			}
+    		}
     	})
 			;
     $urlRouterProvider.otherwise('/tab/home');
