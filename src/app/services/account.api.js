@@ -23,14 +23,27 @@ angular.module('csyywx')
 		this.getBalanceDetail = function(obj) {
 			return $http({
 				method: 'POST',
-				url: HOST_URL + '/account/getAccountInfo',
+				url: HOST_URL + '/account/getAssetDetails',
 				headers: headers,
 				data: utils.param({
 					sessionId: obj.sessionId,
 					queryType: obj.queryType // 1: total, 2: regular(定期), 3: demand(活期)
 				})
 			}).success(function(data) {
-				
+
 			});
 		}
+
+		this.getLatestIncome = function(obj) {
+				return $http({
+					method: 'POST',
+					url: HOST_URL + '/interest/latestMonthInterests',
+					headers: headers,
+					data: utils.param({
+						sessionId: obj.sessionId
+					})
+				}).success(function(data) {
+
+				});
+			};
 	})

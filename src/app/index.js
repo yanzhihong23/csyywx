@@ -138,6 +138,16 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
     			}
     		}
     	})
+    	/************************** info tab ***************************/
+    	.state('tabs.balance', {
+    		url: '/balance?type',
+    		views: {
+    			'info-tab': {
+    				templateUrl: 'app/components/balance/balance.html',
+    				controller: 'BalanceCtrl'
+    			}
+    		}
+    	})
 			;
     $urlRouterProvider.otherwise('/tab/home');
   })

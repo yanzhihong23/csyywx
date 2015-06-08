@@ -75,3 +75,25 @@ angular.module('csyywx')
 		};
 
 	})
+	.service('balanceService', function(userConfig, AccountApi) {
+		var self = this;
+		
+		this.balance = {};
+
+		this.update = function() {
+			AccountApi.getAccountInfo({sessionId: userConfig.getSessionId()})
+				.success(function(data) {
+					if(+data.flag === 1) {
+						var balance = data.data;
+						self.balance.totalIncome = balance.totalInterest;
+						self.balance.lastIncome = balance.yesterdayInterest;
+						self.balance.total = balance.totalAssetAmount;
+						self.balance.regular = balance.totalTermAssetAmount;
+						self.balance.demand = balance.totalDemandAssetAmount;
+						self.balance.experience = balance.totalRewardAmount;
+					}
+				})
+		};
+
+		this.update();
+	})

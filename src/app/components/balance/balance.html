@@ -1,0 +1,14 @@
+<ion-view view-title="">
+	<ion-content>
+		<div class="text-center white-bg">
+			<div>{{title}}（元）</div>
+			<div class="assertive">{{balance | currency:''}}</div>
+		</div>
+
+		<div class="row" ng-repeat="item in items">
+			<div class="col">{{item.date}}</div>
+			<div class="col text-center">{{item.desc}}</div>
+			<div class="col text-right assertive">{{item.amount}}</div>
+		</div>
+	</ion-content>
+</ion-view>
