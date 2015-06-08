@@ -17,3 +17,16 @@
 
   }
 }
+
+input[disabled] {
+	background: #fff;
+}
+
+.item-stacked-label.item-input-inset{
+	padding-left: 16px;
+	 .button{
+	 		position: absolute;
+	 		bottom: 12px;
+	 		right: 12px;
+	 }
+}

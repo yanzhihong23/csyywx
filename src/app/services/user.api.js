@@ -26,7 +26,7 @@ angular.module('csyywx')
 				headers: headers,
 				data: utils.param({
 					mobileNumber: obj.phone,
-					approach: obj.approach, // 1:register, 2:retrieve password, 3:retrieve pay password
+					approach: obj.approach || 1, // 1:register, 2:retrieve password, 3:retrieve pay password
 					opened: ''
 				})
 			}).success(function(data) {
@@ -42,12 +42,12 @@ angular.module('csyywx')
 				data: utils.param({
 					sessionId: obj.sessionId,
 					mobileNumber: obj.phone,
-					checkCode: obj.checkCode,
-					password: obj.password,
-					userType: obj.userType,
-					inviteCode: obj.inviteCode,
+					checkCode: obj.vcode,
+					password: md5.createHash(obj.password || ''),
+					userType: obj.userType || '',
+					inviteCode: obj.inviteCode || '',
 					registerApproach: obj.registerApproach || '03',
-					resource: obj.resource
+					resource: obj.resource || ''
 				})
 			}).success(function(data) {
 				// data.data.sessionId
@@ -60,8 +60,8 @@ angular.module('csyywx')
 				url: HOST_URL + '/login/doLogin',
 				headers: headers,
 				data: utils.param({
-					userName: obj.username,
-					password: obj.password
+					userName: obj.phone,
+					password: md5.createHash(obj.password || '')
 				})
 			}).success(function(data) {
 				// sessionId, mobileNumber, ownerActivityId, isInvest, yesterdayInterest

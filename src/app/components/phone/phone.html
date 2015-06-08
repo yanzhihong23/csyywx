@@ -1,0 +1,15 @@
+<ion-view view-title="手机号码">
+	<ion-content>
+		<form name="phoneForm" ng-submit="submit()">
+			<div class="list">
+			  <label class="item item-input item-stacked-label">
+		      <span class="input-label">请输入手机号码进行注册或登录</span>
+		      <input type="text" placeholder="手机号码" ng-model="user.phone" ng-pattern="/^[0-9]{11}$/" required>
+		    </label>
+			</div>
+			<div class="padding-horizontal">
+				<button type="submit" class="button button-full button-assertive" ng-disabled="phoneForm.$invalid || clicked">确认</button>
+			</div>
+		</form>
+	</ion-content>
+</ion-view>
