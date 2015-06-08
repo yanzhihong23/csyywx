@@ -1,4 +1,9 @@
+@import "variables";
 @import "../../bower_components/ionic/scss/ionic";
+
+.pane, .view{
+	background: $whitesmoke;
+}
 
 .tabs-light > .tabs, .tabs.tabs-light{
   border-top: solid 1px #ddd !important;
@@ -19,7 +24,7 @@
 }
 
 input[disabled] {
-	background: #fff;
+	background: $white;
 }
 
 .item-stacked-label.item-input-inset{

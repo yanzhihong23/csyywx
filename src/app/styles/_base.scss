@@ -1,3 +1,4 @@
+@import "variables";
 @import "mixin";
 
 .hidden{
@@ -41,4 +42,8 @@
   &:after {
     clear: both;
   }
+}
+
+.white-bg{
+  background: $white;
 }
