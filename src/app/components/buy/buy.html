@@ -7,15 +7,15 @@
 				<input type="range" name="term" min="1" max="99" ng-model="form.term">
 				<!--<i class="icon ion-volume-high"></i>-->
 				<div class="interest assertive"
-						 style="-webkit-transform: translate3d({{ other.left }}, 0, 0);transform: translate3d({{ other.left }}, 0, 0);">{{ other.interest }}%+加息{{ form.addInterest }}%</div>
+						 style="-webkit-transform: translate3d({{ other.left }}, 0, 0);transform: translate3d({{ other.left }}, 0, 0);">{{ other.interest }}%<span ng-class="{ 'hidden': other.isBetweenSalaryDate===0 }">+加息{{ form.increaseRate }}%</span></div>
 			</div>
 			<ul class="terms range">
 				<li ng-repeat="item in range.terms" ng-class="{ 'assertive':item.active }">{{ item.term }}</li>
 			</ul>
-			<a class="underline add-interest text-right assertive" ng-href="">加息2%？设置工资发放日</a>
+			<a class="underline add-interest text-right assertive padding" ng-class="{ 'hidden': other.isSetSalaryDay===1 }" ng-href="">加息{{ form.increaseRate }}%？设置工资发放日</a>
 			<label class="item item-input step2">
 				<span class="input-label">2.金额</span>
-				<input type="text" placeholder="1元起投 上限&le;{{ other.maxAmount }}" ng-model="form.amount" max="{{ other.maxAmount }}">
+				<input id="amount" type="text" placeholder="{{ other.minAmount }}元起投 上限&le;{{ other.maxAmount }}" ng-blur="inputBlur()" ng-model="form.amount" max="{{ other.maxAmount }}">
 				<span class="input-label input-add">元</span>
 			</label>
 		</div>
