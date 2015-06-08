@@ -1,0 +1,32 @@
+.total-income {
+  padding: 0 20px 20px;
+  background: $assertive;
+  color: $white;
+}
+
+#INFO .each-item {
+  & + .each-item {
+    padding-bottom: 0;
+    .col-80 {
+      position: relative;
+      &:after {
+        $border-width: 6px;
+        content: "";
+        position: absolute;
+        border-style: dashed dashed solid dashed;
+        line-height: 1;
+        display: inline-block;
+        border-color: red transparent transparent transparent;
+        right: -$border-width;
+        bottom: -$border-width;
+        border-width: $border-width;
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+      }
+
+    }
+  }
+  .col-80 {
+    border-right: 1px solid $border-color;
+  }
+}

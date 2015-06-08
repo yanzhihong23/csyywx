@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('BuyCtrl', function($scope, UserApi, PayApi, userConfig) {
+	.controller('BuyCtrl', function($scope, $ionicLoading, UserApi, PayApi, userConfig) {
 
 		$scope.api = {
 			sessionId: userConfig.getSessionId()
@@ -16,8 +16,8 @@ angular.module('csyywx')
 
 		// 其他数据
 		$scope.other = {
-			interest: 0, // 基本收益率
-			totalInterest: 0, // 百分数
+			interest: 0.00, // 基本收益率
+			totalInterest: 0.00, // 百分数
 			level: 1, // 期限层级
 			minAmount: 10, // 最小投资金额
 			maxAmount: 200000, // 最大投资金额
@@ -25,9 +25,9 @@ angular.module('csyywx')
 			isSetSalaryDay: 0, // 是否设置过加息日
 			isBetweenSalaryDate: 1, // 当前日期是否在加息日中
 			back: { // 到期可收回
-				total: 1000.97,
-				int: '1000', // 整数部分
-				dec: '.97元' // 小数部分
+				total: 0.00,
+				int: '0', // 整数部分
+				dec: '.00元' // 小数部分
 			}
 		};
 
@@ -77,13 +77,13 @@ angular.module('csyywx')
 				var level = $scope.other.level;
 				var terms = $scope.range.terms;
 				$scope.other.back.total = $scope.form.amount * ($scope.other.interest + $scope.form.increaseRate)/100/365 * terms[level].days;
-				if (isNaN($scope.other.back.total)) {
-					$scope.other.back.int = '金额超过上限';
-					$scope.other.back.dec = '';
-				} else {
-					$scope.other.back.int = Math.floor($scope.other.back.total);
-					$scope.other.back.dec = '.' + (100*($scope.other.back.total.toFixed(2) - $scope.other.back.int)).toFixed(0) + '元';
-				}
+				//if (isNaN($scope.other.back.total)) {
+				//	$scope.other.back.int = '金额超过上限';
+				//	$scope.other.back.dec = '';
+				//} else {
+				//	$scope.other.back.int = Math.floor($scope.other.back.total);
+				//	$scope.other.back.dec = '.' + (100*($scope.other.back.total.toFixed(2) - $scope.other.back.int)).toFixed(0) + '元';
+				//}
 			},
 
 			checkAmount: function() {
@@ -152,21 +152,23 @@ angular.module('csyywx')
 
 		};
 
-
+		$ionicLoading.show();
 		PayApi.getProductCode({sessionId: ''})
 			.success(function(data) {
 				console.log(data);
+				$ionicLoading.hide();
 				if (+data.flag === 1) {
 					$scope.api.productCode = data.data.productCode;
+					$ionicLoading.show();
 					PayApi.initOrder($scope.api)
 						.success(function(data) {
 							console.log(data);
+							$ionicLoading.hide();
 							if (+data.flag === 1) {
 								Func.monthRates(data.data.monthRates);
 								Func.otherData(data.data);
 								Func.watches();
 							}
-
 						})
 					;
 				}
@@ -181,12 +183,22 @@ angular.module('csyywx')
 		};
 
 		window.addEventListener('touchend', function() {
-		//	停止滑动
+			//	停止滑动
+			var len = $scope.range.terms.length;
+			var level = $scope.other.level;
+			$scope.form.term = level/len*100 + 100/len/2;
+			if (+level === 0) {
+				$scope.form.term = 1;
+			}
+			if (+level === len -1) {
+				$scope.form.term = 99;
+			}
+			$scope.$apply();
 		});
 
 		window.addEventListener('touchstart', function() {
 		//	滑块bug，投资金额焦点导致滑块不能滑动
 			document.getElementById('amount').blur();
-		})
+		});
 
 	});

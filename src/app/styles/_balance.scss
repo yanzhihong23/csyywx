@@ -1,0 +1,6 @@
+#BALANCE {
+  .each-item + .each-item {
+    border-top: 1px solid $border-color;
+    padding: 10px;
+  }
+}

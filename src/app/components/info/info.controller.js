@@ -7,4 +7,5 @@ angular.module('csyywx')
 		};
 
 		$scope.balance = balanceService.balance;
+
 	});
