@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('BalanceCtrl', function($scope, $stateParams, $ionicNavBarDelegate, AccountApi, userConfig, balanceService, $filter) {
+	.controller('BalanceCtrl', function($scope, $stateParams, AccountApi, userConfig, balanceService, $filter) {
 		var queryType = 0;
 		switch($stateParams.type) {
 			case 'accumulative':
@@ -24,8 +24,6 @@ angular.module('csyywx')
 				$scope.balance = balanceService.balance.demand;
 				break;
 		}
-
-		$ionicNavBarDelegate.title($scope.title);
 
 		if(queryType) {
 			AccountApi.getBalanceDetail({

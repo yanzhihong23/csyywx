@@ -5,7 +5,15 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 	.config(function($ionicConfigProvider) {
 		$ionicConfigProvider.tabs.position('bottom').style('standard');
 	})
-	.run(function($state, $rootScope, userConfig, utils) {
+	.constant('$ionicLoadingConfig', {
+    template: '<ion-spinner icon="bubbles" class="spinner-assertive"></ion-spinner>'
+  })
+	.run(function($state, $rootScope, $window, userConfig, utils) {
+		var userAgent = $window.navigator.userAgent.toLowerCase();
+		if(/micromessenger/.test(userAgent)) {
+			$rootScope.wechat = true;
+		}
+
 		// try auto login
 		if(!userConfig.isLogined()) {
 			userConfig.autoLogin();
