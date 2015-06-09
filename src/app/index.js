@@ -156,6 +156,15 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
     			}
     		}
     	})
+    	.state('tabs.setting', {
+    		url: '/setting',
+    		views: {
+    			'info-tab': {
+    				templateUrl: 'app/components/setting/setting.html',
+    				controller: 'SettingCtrl'
+    			}
+    		}
+    	})
 			;
     $urlRouterProvider.otherwise('/tab/home');
   })
