@@ -27,15 +27,19 @@ input[disabled] {
 	background: $white;
 }
 
-.item-input-inset {
-	&.item-stacked-label, &.item-input{
-		padding-left: 16px;
-		.button{
-	 		position: absolute;
-	 		bottom: 12px;
-	 		right: 12px;
-	 }
-	}
+.item-input-inset.item-stacked-label {
+	padding-left: 16px;
+	.button{
+ 		position: absolute;
+ 		bottom: 12px;
+ 		right: 12px;
+ }
+}
+
+.item-input .button{
+	position: absolute;
+	bottom: 6px;
+	right: 12px;
 }
 
 .button.button-icon i{
