@@ -20,7 +20,8 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 		}
 
 		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-			console.log('sessionId: ' + userConfig.getSessionId())
+      console.log('sessionId: ' + userConfig.getSessionId());
+			console.log(fromState.name + ' --> ' + toState.name);
 			switch(toState.name) {
 				case 'tabs.buy':
 				case 'tabs.info':

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-  .controller('LoginCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, UserApi, userConfig, utils) {
+  .controller('LoginCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, UserApi, userConfig, utils, balanceService) {
     $scope.user = {
     	phone: $stateParams.phone
     };
@@ -20,6 +20,8 @@ angular.module('csyywx')
     			});
 
     			$rootScope.$broadcast('loginSuc');
+          // update balance
+          balanceService.update();
     		}
     	})
     }
