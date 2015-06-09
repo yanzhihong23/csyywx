@@ -45,6 +45,7 @@ angular.module('csyywx')
 		}
 
 		this.logout = function() {
+			localStorageService.remove('isLogined');
 			localStorageService.remove('basicInfo');
 			localStorageService.remove('sessionId');
 			localStorageService.remove('user');
@@ -77,13 +78,14 @@ angular.module('csyywx')
 	})
 	.service('balanceService', function(userConfig, AccountApi) {
 		var self = this;
-		
+
 		this.balance = {};
 
 		this.update = function() {
 			AccountApi.getAccountInfo({sessionId: userConfig.getSessionId()})
 				.success(function(data) {
 					if(+data.flag === 1) {
+						console.log('----------- balance updated -----------');
 						var balance = data.data;
 						self.balance.totalIncome = balance.totalInterest;
 						self.balance.lastIncome = balance.yesterdayInterest;
