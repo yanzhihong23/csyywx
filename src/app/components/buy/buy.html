@@ -1,6 +1,6 @@
 <ion-view view-title="购买" id="BUY">
 	<ion-content>
-		<div class="content-block-inner">
+		<div class="content-block-inner margin-top-0">
 			<p class="step1">1.期限及利率</p>
 			<div class="item range range-assertive">
 				<!--<i class="icon ion-volume-low"></i>-->
@@ -21,8 +21,8 @@
 		</div>
 
 		<div class="content-block-inner padding text-center">
-			<p>预期可收回：<span class="assertive"><span class="big">{{ other.back.int }}</span>{{ other.back.dec }}</span></p>
-			<p>(预期年华收益 {{ other.totalInterest }}%)</p>
+			<p>预期可收回：<span class="assertive"><span class="big">{{ other.back.total | currency: ''}}</span>元</span></p>
+			<p>(预期年化收益 {{ other.totalInterest }}%)</p>
 		</div>
 
 		<div class="padding"><a ng-href="" class="button button-block button-assertive">确认支付</a></div>

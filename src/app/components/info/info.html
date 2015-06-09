@@ -1,20 +1,20 @@
-<ion-view view-title="我的账户">
+<ion-view view-title="我的账户" id="INFO">
 	<ion-nav-buttons side="right">
     <a class="button button-icon" ui-sref="tabs.setting"><i class="ion-ios-more"></i></a>
 	</ion-nav-buttons>
 	<ion-content>
-		<section class="text-center" ng-click="viewBalanceDetail('accumulative')">
-			<div>累计收益(元)</div>
-			<div>{{balance.totalIncome | currency:''}}</div>
-			<div>昨日收益+{{balance.lastIncome | currency: ''}}</div>
+		<section class="text-center total-income" ng-click="viewBalanceDetail('accumulative')">
+			<div class="padding">累计收益(元)</div>
+			<div class="big padding">{{balance.totalIncome | currency:''}}</div>
+			<div class="padding">昨日收益+{{balance.lastIncome | currency: ''}}</div>
 		</section>
 
-		<div class="row white-bg" ng-click="viewBalanceDetail('total')">
+		<div class="each-item border row white-bg padding content-block-inner" ng-click="viewBalanceDetail('total')">
 			<div class="col">总资产</div>
 			<div class="col text-right">{{balance.total | currency: ''}}元</div>
 		</div>
 	
-		<div class="row white-bg">
+		<div class="each-item border row white-bg content-block-inner">
 			<div class="col-80">
 				<div class="row" ng-click="viewBalanceDetail('regular')">
 					<div class="col">定期资产<br><small class="gray">到期后转活期</small></div>
@@ -24,7 +24,7 @@
 			<div class="col-20 col-center text-center"><a ui-sref="tabs.buy" class="assertive">投资</a></div>
 		</div>
 
-		<div class="row white-bg">
+		<div class="each-item border row white-bg content-block-inner">
 			<div class="col-80">
 				<div class="row" ng-click="viewBalanceDetail('demand')">
 					<div class="col">活期资产<br><small class="gray">按年化8.88%计息</small></div>
@@ -34,7 +34,7 @@
 			<div class="col-20 col-center text-center"><a ui-sref="tabs.withdraw" class="assertive">提现</a></div>
 		</div>
 
-		<div class="row white-bg">
+		<div class="each-item border row white-bg content-block-inner">
 			<div class="col-80">
 				<div class="row">
 					<div class="col">体验金<br><small class="gray">分享涨体验金</small></div>
