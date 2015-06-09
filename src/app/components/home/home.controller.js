@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-  .controller('HomeCtrl', function ($scope) {
+  .controller('HomeCtrl', function ($scope, $ionicSlideBoxDelegate) {
     $scope.banners = [{
       href: '',
       src: 'assets/images/banner001.jpg',
@@ -11,5 +11,8 @@ angular.module('csyywx')
       src: 'assets/images/banner002.jpg',
       alt: ''
     }];
+    $ionicSlideBoxDelegate.update();
+    $ionicSlideBoxDelegate.start();
+    console.log("update")
   })
 ;

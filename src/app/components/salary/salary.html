@@ -1,4 +1,34 @@
-<ion-view view-title="设置工资发放日">
+<ion-view view-title="设置工资发放日" id="SALARY">
 	<ion-content>
+
+		<div class="white-bg padding first-block">
+			<p class="text-center p1" ng-if="!active">工资发放日起<span class="assertive">{{ addDays }}天</span>内投资</p>
+			<p class="text-center p2" ng-show="active">每月<span class="assertive">{{ active }}日</span>起<span class="assertive">{{ addDays }}天</span>内投资</p>
+			<p class="text-center p2" ng-show="active">均可获得<span class="assertive">{{ increaseRate }}％</span>的加息！</p>
+		</div>
+
+		<div class="text-center padding gray"><small>点击起始日期，设置你的“那几天”</small></div>
+
+		<div class="card clearfix margin padding">
+			<div class="day pull-left text-center" data-index="{{ day.index }}" ng-click="getActive(day.index)" ng-class="{ 'active': day.active }" ng-repeat="day in days"><span>{{ day.index }}</span></div>
+		</div>
+
+		<div class="row" ng-if="firstSet">
+			<div class="col padding-horizontal">
+				<button class="button button-full button-dark">下次再说</button>
+			</div>
+			<div class="col padding-horizontal">
+				<button class="button button-full button-assertive">享受加息</button>
+			</div>
+		</div>
+
+		<div class="row" ng-if="!firstSet">
+			<div class="col padding-horizontal">
+				<button class="button button-full button-assertive">修改日期</button>
+			</div>
+		</div>
+
+
+
 	</ion-content>
 </ion-view>

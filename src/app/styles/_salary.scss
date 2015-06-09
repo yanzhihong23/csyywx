@@ -1,0 +1,47 @@
+#SALARY {
+  .card {
+    //box-shadow: 0px 5px 5px 2px #ddd;
+    //border-radius: 12px;
+    //background: $white;
+    //margin-top: 0;
+    .day {
+      position: relative;
+      width: 1/7*100%;
+      height: 0;
+      padding-top: 1/7*100%;
+
+      span {
+        $padding: 46%;
+        position: absolute;
+        line-height: 0;
+        display: inline-block;
+        width: 2*$padding;
+        height: 0;
+        padding: $padding 0;
+        top: 0;
+        left: 50% - $padding;
+        border-radius: 100%;
+        color: darken($whitesmoke, 40%);
+        font-weight: 700;
+      }
+      &.active {
+        span {
+          background: $assertive;
+          color: $white;
+        }
+      }
+    }
+  }
+  .first-block {
+    height: 80px;
+  }
+  .p1 {
+    margin: 20px;
+  }
+  .p3 {
+    color: darken($whitesmoke, 40%);
+  }
+  .p-small {
+    font-size: 12px;
+  }
+}
