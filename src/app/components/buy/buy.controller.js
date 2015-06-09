@@ -56,6 +56,7 @@ angular.module('csyywx')
 						self.active = false;
 					}
 				});
+
 				terms[level].active = true;
 			},
 
@@ -129,6 +130,10 @@ angular.module('csyywx')
 					Func.changeLeft();
 				});
 				$scope.$watch('other.level', function() {
+					var level = $scope.other.level;
+					var terms = $scope.range.terms;
+					console.log(terms[level], level);
+					if (!terms[level]) return;
 					Func.changeTerm();
 					Func.changeInterest();
 					Func.changeMaxAmount();

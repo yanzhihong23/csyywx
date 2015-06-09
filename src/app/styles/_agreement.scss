@@ -1,0 +1,27 @@
+.agreement {
+  font-size: 12px;
+  .text-indent {
+    text-indent: 2em;
+  }
+  p {
+    margin: 0;
+  }
+  .list-style {
+    position: absolute;
+    left: 1em;
+  }
+  ol {
+    padding-left: 2.5em;
+    &.cjk-ideographic {
+      li {
+        list-style-type: cjk-ideographic;
+      }
+    }
+  }
+  ul {
+    padding-left: 1em;
+  }
+  .agreement-tb {
+    width: 100%;
+  }
+}
