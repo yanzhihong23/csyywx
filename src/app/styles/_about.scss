@@ -2,4 +2,15 @@
   .text-indent {
     text-indent: 2em;
   }
+  .logo {
+    display: inline-block;
+    width: 150px;
+    img {
+    }
+  }
+  .share {
+    img {
+      vertical-align: middle;
+    }
+  }
 }
