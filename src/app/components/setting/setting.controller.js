@@ -1,16 +1,10 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('SettingCtrl', function($scope, $state, UserApi, userConfig, utils) {
-		UserApi.getUserData({sessionId: userConfig.getSessionId()})
-			.success(function(data) {
-				if(+data.flag === 1) {
-					$scope.userData = data.data.userData;
-				}
-			});
+	.controller('SettingCtrl', function($scope, $state, UserApi, userConfig, utils, settingService) {
+		$scope.userData = settingService.setting;
 
 		$scope.logout = function() {
 			userConfig.logout();
-			// $state.go('tabs.home');
 		};
 	})

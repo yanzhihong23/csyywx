@@ -1,33 +1,33 @@
 <ion-view view-title="设置">
 	<ion-content>
 		<div class="list padding-vertical no-margin">
-			<a class="item" ng-href="{{userData.realName ? '' : '#/tab/card'}}">
+			<a class="item" ng-href="{{userData.realname ? '' : '#/tab/card'}}">
 				实名认证
-				<span class="item-note" ng-class="{blue: !userData.realName}">
-					{{userData.realName ? userData.realName : '未认证'}}
+				<span class="item-note" ng-class="{blue: !userData.realname}">
+					{{userData.realname ? userData.realname : '未认证'}}
 				</span>
 			</a>
 			<a class="item">
 				手机认证
-				<span class="item-note">{{userData.mobileNumber}}</span>
+				<span class="item-note">{{userData.phone}}</span>
 			</a>
-			<a class="item" ng-href="{{userData.bankList ? '' : '#/tab/card'}}">
+			<a class="item" ng-href="{{userData.card ? '' : '#/tab/card'}}">
 				银行卡认证
-				<span class="item-note" ng-class="{blue: !userData.bankList}">
-					{{userData.bankList ? userData.bankList[0].bankName + '(' + userData.bankList[0].cardCode + ')' : '未认证'}}
+				<span class="item-note" ng-class="{blue: !userData.card}">
+					{{userData.card ? userData.card : '未认证'}}
 				</span>
 			</a>
 			<a class="item" ui-sref="tabs.changePassword">
 				登录密码设置
 				<span class="item-note blue">修改登录密码</span>
 			</a>
-			<a class="item" ui-sref="{{+userData.hasPayPassword? 'tabs.changePayPassword' : 'tabs.setPayPassword'}}">
+			<a class="item" ng-href="{{userData.payPassword ? '#/tab/changePayPassword' : '#/tab/setPayPassword'}}">
 				支付密码设置
-				<span class="item-note blue">{{+userData.hasPayPassword ? '修改' : '设置'}}支付密码</span>
+				<span class="item-note blue">{{userData.payPassword ? '修改' : '设置'}}支付密码</span>
 			</a>
 			<a class="item" ui-sref="tabs.setSalary">
 				我的工资发放日
-				<span class="item-note blue">每月12日</span>
+				<span class="item-note blue">{{userData.salaryDay ? '每月' + userData.salaryDay + '日' : '未设置'}}</span>
 			</a>
 		</div>
 

@@ -1,20 +1,31 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('SetSalaryCtrl', function($scope) {
+	.controller('SetSalaryCtrl', function($scope, utils, UserApi, userConfig, settingService) {
+		UserApi.getSalaryDay({sessionId: userConfig.getSessionId()})
+			.success(function(data) {
+				if(+data.flag === 1) {
+					$scope.active = data.data.salaryDay;
+					$scope.extraInterest = data.data.salaryDayExtraRate;
+					$scope.remain = data.data.remindTimes;
+					$scope.addDays = data.data.containDays;
+					$scope.firstSet = !data.data.salaryDay;
+
+					if($scope.active) {
+						set7days();
+					}
+				}
+			});
 
 		$scope.days = [];
-		$scope.active = null;
-		$scope.addDays = 7;
 		$scope.daysCurrentMonth = 30;
-		$scope.increaseRate = 2;
-
-		$scope.firstSet = true;
 
 		for (var i=1; i<=$scope.daysCurrentMonth; i++) {
 			$scope.days.push({index: i,active: false});
 		}
+
 		$scope.getActive = function(index) {
+			if(!$scope.remain) return;
 
 			$scope.active = +index;
 			reset();
@@ -44,5 +55,22 @@ angular.module('csyywx')
 				}
 			}
 		}
+
+		$scope.skip = function() {
+			utils.goBack();
+		};
+
+		$scope.set = function() {
+			UserApi.setSalaryDay({
+				sessionId: userConfig.getSessionId(),
+				salaryDay: $scope.active
+			}).success(function(data) {
+				if(+data.flag === 1) {
+					// update setting service
+					settingService.update();
+					utils.goBack();
+				}
+			})
+		};
 	})
 ;
