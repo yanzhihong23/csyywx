@@ -125,6 +125,7 @@ angular.module('csyywx')
 				$scope.$watch('form.term', function() {
 					var len = $scope.range.terms.length;
 					var term = $scope.form.term;
+					if (len === 0) return;
 					$scope.other.level = (Math.abs(term-100/len/2)/100*len).toFixed(0);
 
 					Func.changeLeft();
@@ -132,7 +133,6 @@ angular.module('csyywx')
 				$scope.$watch('other.level', function() {
 					var level = $scope.other.level;
 					var terms = $scope.range.terms;
-					console.log(terms[level], level);
 					if (!terms[level]) return;
 					Func.changeTerm();
 					Func.changeInterest();
@@ -152,6 +152,34 @@ angular.module('csyywx')
 					Func.changeBack();
 
 					Func.checkAmount();
+				});
+			},
+
+			others: function() {
+				$scope.inputBlur = function() {
+					if ($scope.form.amount < $scope.other.minAmount && $scope.form.amount !== '') {
+						$scope.form.amount = $scope.other.minAmount;
+					}
+				};
+
+				window.addEventListener('touchend', function() {
+					//	停止滑动
+					var len = $scope.range.terms.length;
+					var level = $scope.other.level;
+					if (len === 0) return;
+					$scope.form.term = level/len*100 + 100/len/2;
+					if (+level === 0) {
+						$scope.form.term = 1;
+					}
+					if (+level === len -1) {
+						$scope.form.term = 99;
+					}
+					$scope.$apply();
+				});
+
+				window.addEventListener('touchstart', function() {
+					//	滑块bug，投资金额焦点导致滑块不能滑动
+					document.getElementById('amount').blur();
 				});
 			}
 
@@ -173,37 +201,12 @@ angular.module('csyywx')
 								Func.monthRates(data.data.monthRates);
 								Func.otherData(data.data);
 								Func.watches();
+								Func.others();
 							}
 						})
 					;
 				}
 			})
 		;
-
-
-		$scope.inputBlur = function() {
-			if ($scope.form.amount < $scope.other.minAmount && $scope.form.amount !== '') {
-				$scope.form.amount = $scope.other.minAmount;
-			}
-		};
-
-		window.addEventListener('touchend', function() {
-			//	停止滑动
-			var len = $scope.range.terms.length;
-			var level = $scope.other.level;
-			$scope.form.term = level/len*100 + 100/len/2;
-			if (+level === 0) {
-				$scope.form.term = 1;
-			}
-			if (+level === len -1) {
-				$scope.form.term = 99;
-			}
-			$scope.$apply();
-		});
-
-		window.addEventListener('touchstart', function() {
-		//	滑块bug，投资金额焦点导致滑块不能滑动
-			document.getElementById('amount').blur();
-		});
 
 	});
