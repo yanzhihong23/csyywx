@@ -11,29 +11,29 @@
 				手机认证
 				<span class="item-note">{{userData.mobileNumber}}</span>
 			</a>
-			<a class="item">
+			<a class="item" ui-sref="{{userData.bank.url}}">
 				银行卡认证
 				<span class="item-note" ng-class="{blue: !userData.bankList.length}">
-					{{userData.bankList.length ? '中国工商银行(尾号1234)' : '未认证'}}
+					{{userData.bank.name}}
 				</span>
 			</a>
-			<a class="item">
+			<a class="item" ui-sref="tabs.changePassword">
 				登录密码设置
 				<span class="item-note blue">修改登录密码</span>
 			</a>
-			<a class="item">
+			<a class="item" ui-sref="{{+userData.hasPayPassword? 'tabs.changePaypassword' : 'tabs.setPayPassword'}}">
 				支付密码设置
 				<span class="item-note blue">{{+userData.hasPayPassword ? '修改' : '设置'}}支付密码</span>
 			</a>
-			<a class="item">
+			<a class="item" ui-sref="tabs.setSalary">
 				我的工资发放日
 				<span class="item-note blue">每月12日</span>
 			</a>
 		</div>
 
 		<div class="list no-margin">
-			<a class="item">更多财神爷爷</a>
-			<a class="item">给我反馈</a>
+			<a class="item" ui-sref="tabs.about">更多财神爷爷</a>
+			<a class="item" ui-sref="tabs.feedback">给我反馈</a>
 		</div>
 
 		<div class="padding">

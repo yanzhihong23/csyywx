@@ -158,6 +158,59 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
     			}
     		}
     	})
+      .state('tabs.changePassword', {
+        url: '/changePassword',
+        views: {
+          'info-tab': {
+            templateUrl: 'app/components/password/password.html',
+            controller: 'PasswordCtrl'
+          }
+        }
+      })
+      .state('tabs.changePayPassword', {
+        url: '/changePayPassword',
+        views: {
+          'info-tab': {
+            templateUrl: 'app/components/password/password.html',
+            controller: 'PasswordCtrl'
+          }
+        }
+      })
+      .state('tabs.setPayPassword', {
+        url: '/setPayPassword',
+        views: {
+          'info-tab': {
+            templateUrl: 'app/components/password/password.html',
+            controller: 'PasswordCtrl'
+          }
+        }
+      })
+      .state('tabs.setSalary', {
+        url: '/setSalary',
+        views: {
+          'info-tab': {
+            templateUrl: 'app/components/salary/salary.html',
+            controller: 'SetSalaryCtrl'
+          }
+        }
+      })
+      .state('tabs.about', {
+        url: '/about',
+        views: {
+          'info-tab': {
+            templateUrl: 'app/components/about/about.html'
+          }
+        }
+      })
+      .state('tabs.feedback', {
+        url: '/feedback',
+        views: {
+          'info-tab': {
+            templateUrl: 'app/components/feedback/feedback.html',
+            controller: 'FeedbackCtrl'
+          }
+        }
+      })
 			;
     $urlRouterProvider.otherwise('/tab/home');
   })
