@@ -48,22 +48,14 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 
 			}
 		});
-
-		$rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-      if(!/tabs.home|tabs.info|tabs.buy/.test(toState.name)) {
-        angular.element(document.querySelector('.tab-nav.tabs')).addClass('hidden');
-      } else {
-        angular.element(document.querySelector('.tab-nav.tabs')).removeClass('hidden');
-      }
-    });
-
 	})
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('tabs', {
         url: '/tab',
         abstract: true,
-        templateUrl: 'app/tabs/tabs.html'
+        templateUrl: 'app/tabs/tabs.html',
+        controller: 'TabsCtrl'
       })
       /************************** three main tabs ***************************/
       .state('tabs.home', {
