@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-	.service('userConfig', function(localStorageService, UserApi, $rootScope) {
+	.service('userConfig', function($state, localStorageService, UserApi, $rootScope) {
 		var self = this;
 		var auto = null;
 
@@ -50,6 +50,7 @@ angular.module('csyywx')
 			localStorageService.remove('sessionId');
 			localStorageService.remove('user');
 			// localStorageService.clearAll();
+			$state.go('tabs.home');
 		};
 
 		function autoLogin(broadcast) {

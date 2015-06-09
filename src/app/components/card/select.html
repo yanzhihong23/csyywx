@@ -1,0 +1,7 @@
+<ion-view view-title="选择银行">
+	<ion-content>
+		<div class="list">
+			<div class="item" ng-repeat="bank in bankList" ng-click="select($index)">{{bank.bankName}}</div>
+		</div>
+	</ion-content>
+</ion-view>

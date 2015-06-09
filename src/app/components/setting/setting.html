@@ -1,7 +1,7 @@
 <ion-view view-title="设置">
 	<ion-content>
 		<div class="list padding-vertical no-margin">
-			<a class="item">
+			<a class="item" ng-href="{{userData.realName ? '' : '#/tab/card'}}">
 				实名认证
 				<span class="item-note" ng-class="{blue: !userData.realName}">
 					{{userData.realName ? userData.realName : '未认证'}}
@@ -11,17 +11,17 @@
 				手机认证
 				<span class="item-note">{{userData.mobileNumber}}</span>
 			</a>
-			<a class="item" ui-sref="{{userData.bank.url}}">
+			<a class="item" ng-href="{{userData.bankList ? '' : '#/tab/card'}}">
 				银行卡认证
-				<span class="item-note" ng-class="{blue: !userData.bankList.length}">
-					{{userData.bank.name}}
+				<span class="item-note" ng-class="{blue: !userData.bankList}">
+					{{userData.bankList ? userData.bankList[0].bankName + '(' + userData.bankList[0].cardCode + ')' : '未认证'}}
 				</span>
 			</a>
 			<a class="item" ui-sref="tabs.changePassword">
 				登录密码设置
 				<span class="item-note blue">修改登录密码</span>
 			</a>
-			<a class="item" ui-sref="{{+userData.hasPayPassword? 'tabs.changePaypassword' : 'tabs.setPayPassword'}}">
+			<a class="item" ui-sref="{{+userData.hasPayPassword? 'tabs.changePayPassword' : 'tabs.setPayPassword'}}">
 				支付密码设置
 				<span class="item-note blue">{{+userData.hasPayPassword ? '修改' : '设置'}}支付密码</span>
 			</a>

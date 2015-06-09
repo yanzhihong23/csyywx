@@ -15,7 +15,7 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 		}
 
 		// try auto login
-		if(!userConfig.isLogined()) {
+		if(userConfig.isLogined()) {
 			userConfig.autoLogin();
 		}
 
@@ -38,14 +38,19 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 					}
 
 					break;
+        case 'tabs.setting':
+          if(!userConfig.isLogined()) {
+            event.preventDefault();
+          }
+          break;
 				case 'tabs.phone':
 				case 'tabs.register':
 				case 'tabs.login':
 					if(userConfig.isLogined()) {
 						event.preventDefault();
 						$state.go('tabs.home');
-						break;
 					}
+          break;
 
 			}
 		});
@@ -208,6 +213,24 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
           'info-tab': {
             templateUrl: 'app/components/feedback/feedback.html',
             controller: 'FeedbackCtrl'
+          }
+        }
+      })
+      .state('tabs.card', {
+        url: '/card',
+        views: {
+          'info-tab': {
+            templateUrl: 'app/components/card/card.html',
+            controller: 'CardCtrl'
+          }
+        }
+      })
+      .state('tabs.selectCard', {
+        url: '/selectCard',
+        views: {
+          'info-tab': {
+            templateUrl: 'app/components/card/select.html',
+            controller: 'SelectCardCtrl'
           }
         }
       })
