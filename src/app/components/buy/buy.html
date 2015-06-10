@@ -1,31 +1,33 @@
 <ion-view view-title="购买" id="BUY">
 	<ion-content>
-		<div class="content-block-inner margin-top-0">
-			<p class="step1">1.期限及利率</p>
-			<div class="item range range-assertive">
-				<!--<i class="icon ion-volume-low"></i>-->
-				<input type="range" name="term" min="1" max="99" ng-model="form.term">
-				<!--<i class="icon ion-volume-high"></i>-->
-				<div class="interest assertive"
-						 style="-webkit-transform: translate3d({{ other.left }}, 0, 0);transform: translate3d({{ other.left }}, 0, 0);">{{ other.interest }}%<span ng-class="{ 'hidden': other.isBetweenSalaryDate===0 }">+加息{{ form.increaseRate }}%</span></div>
+		<form name="buyForm" ng-submit="submit()">
+			<div class="content-block-inner margin-top-0">
+				<p class="step1">1.期限及利率</p>
+				<div class="item range range-assertive">
+					<input type="range" name="term" min="1" max="99" ng-model="order.range">
+					<div class="interest assertive"
+							 style="-webkit-transform: translate3d({{ order.left }}, 0, 0);transform: translate3d({{ order.left }}, 0, 0);">{{ order.desc }}</div>
+				</div>
+				<ul class="terms range">
+					<li ng-repeat="item in terms" ng-class="{ 'assertive':item.active }">{{ item.name }}</li>
+				</ul>
+				<a class="underline add-interest text-right assertive padding" ng-if="!salaryDaySet" ng-href="">加息2%？设置工资发放日</a>
+				<label class="item item-input step2">
+					<span class="input-label">2.金额</span>
+					<input id="amount" type="text" placeholder="{{ order.minAmount }}元起投 上限&le;{{ order.maxAmount }}" ng-blur="inputBlur()" ng-model="order.amount" max="{{ order.maxAmount }}" required>
+					<span class="input-label input-add">元</span>
+				</label>
 			</div>
-			<ul class="terms range">
-				<li ng-repeat="item in range.terms" ng-class="{ 'assertive':item.active }">{{ item.term }}</li>
-			</ul>
-			<a class="underline add-interest text-right assertive padding" ng-class="{ 'hidden': other.isSetSalaryDay===1 }" ng-href="">加息{{ form.increaseRate }}%？设置工资发放日</a>
-			<label class="item item-input step2">
-				<span class="input-label">2.金额</span>
-				<input id="amount" type="text" placeholder="{{ other.minAmount }}元起投 上限&le;{{ other.maxAmount }}" ng-blur="inputBlur()" ng-model="form.amount" max="{{ other.maxAmount }}">
-				<span class="input-label input-add">元</span>
-			</label>
-		</div>
 
-		<div class="content-block-inner padding text-center">
-			<p>预期可收回：<span class="assertive"><span class="big">{{ other.back.total | currency: ''}}</span>元</span></p>
-			<p>(预期年化收益 {{ other.totalInterest }}%)</p>
-		</div>
+			<div class="content-block-inner padding text-center">
+				<p>预期收益：<span class="assertive"><span class="big">{{ order.reward | currency: ''}}</span>元</span></p>
+				<p>(预期年化收益率 {{ order.annualYield }}%)</p>
+			</div>
 
-		<div class="padding"><a ng-href="" class="button button-block button-assertive">确认支付</a></div>
+			<div class="padding">
+				<button type="submit" class="button button-block button-assertive" ng-disabled="buyForm.$invalid">确认支付</button>
+			</div>
+		</form>
 
 		<p class="text-center small">确认支付代表您同意此<a class="underline calm" ui-sref="tabs.userAgreement">用户协议</a>、<a class="underline calm" ui-sref="tabs.serviceAgreement">服务协议</a>及<a class="underline calm" ui-sref="tabs.payAgreement">支付协议</a></p>
 	</ion-content>
