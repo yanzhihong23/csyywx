@@ -109,6 +109,20 @@ angular.module('csyywx')
 			})
 		};
 
+		this.checkPayPassword = function(obj) {
+			return $http({
+				method: 'POST',
+				url: HOST_URL + '/user/checkPayPassword',
+				headers: headers,
+				data: utils.param({
+					sessionId: obj.sessionId,
+					oldPassword: obj.oldPassword
+				})
+			}).success(function(data) {
+
+			})
+		}
+
 		this.changePayPassword = function(obj) {
 			return $http({
 				method: 'POST',
