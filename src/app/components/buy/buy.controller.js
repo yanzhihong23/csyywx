@@ -82,23 +82,23 @@ angular.module('csyywx')
 			$scope.order.reward = +$scope.order.amount*$scope.order.annualYield/100/365*$scope.order.days || 0;
 		};
 
-		window.addEventListener('touchend', function() {
-			var len = $scope.terms.length;
-			if (len === 0) return;
-			$scope.order.range = level/len*100 + 100/len/2;
-			if (+level === 0) {
-				$scope.order.range = 1;
-			}
-			if (+level === len -1) {
-				$scope.order.range = 99;
-			}
-			$scope.$apply();
-		});
+		angular.element(document.querySelector('#BUY'))
+			.bind('touchstart', function() {
+				document.getElementById('amount').blur();
+			})
+			.bind('touchend', function() {
+				var len = $scope.terms.length;
+				if (len === 0) return;
+				$scope.order.range = level/len*100 + 100/len/2;
+				if (+level === 0) {
+					$scope.order.range = 1;
+				}
+				if (+level === len -1) {
+					$scope.order.range = 99;
+				}
+				$scope.$apply();
+			});
 
-		window.addEventListener('touchstart', function() {
-			//	滑块bug，投资金额焦点导致滑块不能滑动
-			document.getElementById('amount').blur();
-		});
 
 		$scope.submit = function() {
 			console.log($scope.order);
