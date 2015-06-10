@@ -3,7 +3,6 @@
 angular.module('csyywx')
 	.controller('PayPasswordCtrl', function($scope, $timeout, $ionicLoading, userConfig, UserApi, settingService, utils) {
 		var sessionId =  userConfig.getSessionId();
-		$scope.ok = false;
 
 		if (settingService.setting.payPassword) {
 			$scope.step = {
@@ -36,6 +35,7 @@ angular.module('csyywx')
 		}
 
 		var insertPassword = (function() {
+			$scope.ok = false;
 			var current = 0;
 			var len = $scope.inserts.length;
 			var timer;

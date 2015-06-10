@@ -8,7 +8,7 @@
 		    </label>
 		    <div class="item item-input item-stacked-label item-input-inset">
 		      <span class="input-label">验证码 <small ng-show="user.invalidVcode" class="assertive">*验证码不正确</small></span>
-		      <input type="text" placeholder="" ng-model="user.vcode" ng-change="user.invalidVcode=false" required>
+		      <input type="text" placeholder="验证码" ng-model="user.vcode" ng-change="user.invalidVcode=false" required>
 		      <button type="button" class="button button-small button-assertive" ng-click="sendVcode()" ng-disabled="resendCountdown">
 			      <span ng-show="resendCountdown">{{resendCountdown}}秒后重新发送</span>
 			      <span ng-hide="resendCountdown">发送验证码</span>

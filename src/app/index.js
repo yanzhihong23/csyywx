@@ -119,6 +119,15 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 	        }
 	      }
     	})
+			.state('tabs.forgetPassword', {
+				url: '/forgetPassword?phone',
+				views: {
+					'home-tab': {
+						templateUrl: 'app/components/forget/forget.html',
+						controller: 'ForgetPasswordCtrl'
+					}
+				}
+			})
     	/************************** buy tab ***************************/
     	.state('tabs.userAgreement', {
     		url: '/userAgreement',
@@ -261,6 +270,7 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
           }
         }
       })
+
 			;
     $urlRouterProvider.otherwise('/tab/home');
   })

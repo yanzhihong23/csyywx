@@ -1,4 +1,17 @@
-<ion-view view-title="反馈">
+<ion-view view-title="反馈" id="FEEDBACK">
 	<ion-content>
+
+		<form name="feedbackForm" ng-submit="submit()">
+			<div class="list list-inset">
+				<label class="item item-input padding-top padding-left padding-right">
+					<textarea autofocus="true" rows="8" ng-model="form.feedback" placeholder="感谢您对财神爷爷的支持，我们期待您的宝贵意见" required></textarea>
+				</label>
+			</div>
+
+			<div class="padding-horizontal">
+				<button type="submit" class="button button-full button-assertive" ng-disabled="feedbackForm.$invalid">提交</button>
+			</div>
+		</form>
+
 	</ion-content>
 </ion-view>

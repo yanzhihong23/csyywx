@@ -1,4 +1,4 @@
-<ion-view view-title="登录">
+<ion-view view-title="登录" id="LOGIN">
 	<ion-content>
 		<form name="loginForm" ng-submit="submit()">
 			<div class="list white-bg content-block-inner">
@@ -11,6 +11,9 @@
 		      <input type="password" placeholder="" ng-pattern="/^[\s\S]{6,16}$/" ng-model="user.password" required>
 		    </label>
 			</div>
+
+			<a class="text-right padding-bottom padding-right padding-left assertive pull-right" ui-sref="tabs.forgetPassword({phone: user.phone})"><small>忘记密码？</small></a>
+
 			<div class="padding-horizontal">
 				<button type="submit" class="button button-full button-assertive" ng-disabled="loginForm.$invalid">登录</button>
 			</div>
