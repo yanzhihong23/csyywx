@@ -176,8 +176,8 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
         url: '/changePayPassword',
         views: {
           'info-tab': {
-            templateUrl: 'app/components/password/password.html',
-            controller: 'PasswordCtrl'
+            templateUrl: 'app/components/paypassword/password.html',
+            controller: 'PayPasswordCtrl'
           }
         }
       })
@@ -185,8 +185,8 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
         url: '/setPayPassword',
         views: {
           'info-tab': {
-            templateUrl: 'app/components/password/password.html',
-            controller: 'PasswordCtrl'
+            templateUrl: 'app/components/paypassword/password.html',
+            controller: 'PayPasswordCtrl'
           }
         }
       })
