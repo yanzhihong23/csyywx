@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('BuyCtrl', function($scope, $ionicLoading, UserApi, PayApi, userConfig) {
+	.controller('BuyCtrl', function($scope, $ionicLoading, UserApi, PayApi, userConfig, $timeout) {
 		var sessionId = userConfig.getSessionId(), productCode, level;
 
 		$scope.salaryDaySet = false;
-
+		$scope.inSalaryDays = false;
+		$scope.terms = [];
 		$scope.order = {
 			amount: null,
 			range: 45.82,
@@ -25,8 +26,13 @@ angular.module('csyywx')
 					}).success(function(data) {
 							$ionicLoading.hide();
 							if (+data.flag === 1) {
+								$scope.salaryDaySet = !!data.data.isSetSalaryDay;
+								$scope.inSalaryDays = !!data.data.isBetweenSalaryDate;
 								initRange(data.data.monthRates);
-								$scope.salaryDaySet = data.data.isSetSalaryDay;
+
+								$timeout(function() {
+									rangePositionFix();
+								}, 100)
 							}
 						})
 					;
@@ -37,7 +43,7 @@ angular.module('csyywx')
 			$scope.terms = data.map(function(obj) {
 				return {
 					name: obj.monthName,
-					annualYield: (obj.productRate*100 + obj.monthRate*100 + obj.increaseRate*100)/100,
+					annualYield: (obj.productRate*100 + obj.monthRate*100 + ($scope.inSalaryDays ? obj.increaseRate*100 : 0))/100,
 					minAmount: 1,
 					maxAmount: +obj.investAmountMax,
 					days: +obj.countDays,
@@ -82,21 +88,25 @@ angular.module('csyywx')
 			$scope.order.reward = +$scope.order.amount*$scope.order.annualYield/100/365*$scope.order.days || 0;
 		};
 
+		var rangePositionFix = function() {
+			var len = $scope.terms.length;
+			if (len === 0) return;
+			$scope.order.range = level/len*100 + 100/len/2;
+			if (+level === 0) {
+				$scope.order.range = 1;
+			}
+			if (+level === len -1) {
+				$scope.order.range = 99;
+			}
+			$scope.$apply();
+		};
+
 		angular.element(document.querySelector('#BUY'))
 			.bind('touchstart', function() {
 				document.getElementById('amount').blur();
 			})
 			.bind('touchend', function() {
-				var len = $scope.terms.length;
-				if (len === 0) return;
-				$scope.order.range = level/len*100 + 100/len/2;
-				if (+level === 0) {
-					$scope.order.range = 1;
-				}
-				if (+level === len -1) {
-					$scope.order.range = 99;
-				}
-				$scope.$apply();
+				rangePositionFix();
 			});
 
 
