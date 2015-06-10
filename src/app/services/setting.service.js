@@ -10,6 +10,8 @@ angular.module('csyywx')
 			UserApi.getUserData({sessionId: userConfig.getSessionId()})
 				.success(function(data) {
 					if(+data.flag === 1) {
+						console.log('----------- setting updated -----------');
+
 						var data = data.data.userData;
 						self.setting.realname = data.realName;
 						self.setting.phone = data.mobileNumber;

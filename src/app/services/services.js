@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-	.service('userConfig', function($state, localStorageService, UserApi, $rootScope) {
+	.service('userConfig', function($state, localStorageService, UserApi, $rootScope, $ionicHistory) {
 		var self = this;
 		var auto = null;
 
@@ -51,6 +51,8 @@ angular.module('csyywx')
 			localStorageService.remove('user');
 			// localStorageService.clearAll();
 			$state.go('tabs.home');
+			$ionicHistory.clearHistory();
+			$ionicHistory.clearCache();
 		};
 
 		function autoLogin(broadcast) {

@@ -10,6 +10,7 @@ angular.module('csyywx')
       $ionicLoading.show();
       UserApi.checkUser($scope.user)
         .success(function(data) {
+          $scope.clicked = false;
           $ionicLoading.hide();
           if(+data.flag === 1) {
             if(+data.data.isOldUser) {

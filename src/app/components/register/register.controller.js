@@ -56,6 +56,10 @@ angular.module('csyywx')
 
     			$rootScope.$broadcast('loginSuc');
 
+          // update balance and setting services
+          balanceService.update();
+          settingService.update();
+
     		} else if(+data.flag === 3) { // invalid vcode
     			$scope.user.invalidVcode = true;
     		}
