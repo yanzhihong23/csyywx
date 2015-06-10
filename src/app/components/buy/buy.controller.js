@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('BuyCtrl', function($scope, $ionicLoading, UserApi, PayApi, userConfig, $timeout) {
-		var sessionId = userConfig.getSessionId(), productCode, level;
+	.controller('BuyCtrl', function($scope, $state, $ionicLoading, UserApi, PayApi, userConfig, $timeout, orderService) {
+		var sessionId = userConfig.getSessionId(), productCode, level, orderId, hasPayPassword, card;
 
 		$scope.salaryDaySet = false;
 		$scope.inSalaryDays = false;
@@ -19,6 +19,7 @@ angular.module('csyywx')
 			.success(function(data) {
 				$ionicLoading.hide();
 				if (+data.flag === 1) {
+					// save product code
 					productCode = data.data.productCode;
 					$ionicLoading.show();
 					PayApi.initOrder({
@@ -30,6 +31,10 @@ angular.module('csyywx')
 								$scope.salaryDaySet = !!data.data.isSetSalaryDay;
 								$scope.inSalaryDays = !!data.data.isBetweenSalaryDate;
 								initRange(data.data.monthRates);
+								// save order id
+								orderId = data.data.orderid;
+								hasPayPassword = !!data.data.userDetail.hasPayPassword;
+								card = data.data.bindCardList && data.data.bindCardList[0];
 
 								$timeout(function() {
 									rangePositionFix();
@@ -111,7 +116,34 @@ angular.module('csyywx')
 
 
 		$scope.submit = function() {
+			console.log('hasCard: ' + !!card);
+			console.log('hasPayPassword: ' + hasPayPassword);
+
 			console.log($scope.order);
+			orderService.order = {
+				sessionId: sessionId,
+				orderid: orderId,
+				productCode: productCode,
+				amount: $scope.order.amount,
+				systemMonthRateId: $scope.order.systemMonthRateId
+			};
+
+			if(card) {
+				if(!hasPayPassword) {
+					$state.go('tabs.setPayPassword');
+				} else {
+					// go to quick pay
+					orderService.order.userCardCode = card.userCardCode;
+					orderService.order.storablePan = card.shortNumber;
+					orderService.order.bankName = card.bankName;
+					orderService.order.tailNo = card.bankCardNumber;
+					console.log('quick pay')
+					$state.go('tabs.quickpay');
+				}
+			} else {
+				// go to bind and pay
+				$state.go('tabs.pay');
+			}
 		};
 
 	});

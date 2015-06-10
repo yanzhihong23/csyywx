@@ -144,6 +144,33 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
     			}
     		}
     	})
+      .state('tabs.pay', {
+        url: '/pay',
+        views: {
+          'buy-tab': {
+            templateUrl: 'app/components/card/card.html',
+            controller: 'CardCtrl'
+          }
+        }
+      })
+      .state('tabs.paySelectCard', {
+        url: '/paySelectCard',
+        views: {
+          'buy-tab': {
+            templateUrl: 'app/components/card/select.html',
+            controller: 'SelectCardCtrl'
+          }
+        }
+      })
+      .state('tabs.quickpay', {
+        url: '/quickpay',
+        views: {
+          'buy-tab': {
+            templateUrl: 'app/components/quickpay/quickpay.html',
+            controller: 'QuickpayCtrl'
+          }
+        }
+      })
     	/************************** info tab ***************************/
     	.state('tabs.balance', {
     		url: '/balance?type',
