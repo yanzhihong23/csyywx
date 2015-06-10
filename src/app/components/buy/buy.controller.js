@@ -8,6 +8,7 @@ angular.module('csyywx')
 		$scope.inSalaryDays = false;
 		$scope.terms = [];
 		$scope.order = {
+			minAmount: 1,
 			amount: null,
 			range: 45.82,
 			reward: 0
@@ -32,7 +33,7 @@ angular.module('csyywx')
 
 								$timeout(function() {
 									rangePositionFix();
-								}, 100)
+								}, 100);
 							}
 						})
 					;
@@ -44,7 +45,6 @@ angular.module('csyywx')
 				return {
 					name: obj.monthName,
 					annualYield: (obj.productRate*100 + obj.monthRate*100 + ($scope.inSalaryDays ? obj.increaseRate*100 : 0))/100,
-					minAmount: 1,
 					maxAmount: +obj.investAmountMax,
 					days: +obj.countDays,
 					desc: obj.description,
