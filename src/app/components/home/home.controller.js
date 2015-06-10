@@ -11,8 +11,12 @@ angular.module('csyywx')
       src: 'assets/images/banner002.jpg',
       alt: ''
     }];
-    $ionicSlideBoxDelegate.update();
-    $ionicSlideBoxDelegate.start();
-    console.log("update")
+
+    $scope.$on('$ionicView.afterEnter', function(){
+      console.log("------ update slide box ------");
+
+      $ionicSlideBoxDelegate.update();
+      $ionicSlideBoxDelegate.start();
+    });
   })
 ;
