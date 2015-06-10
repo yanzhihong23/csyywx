@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-  .controller('RegisterCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, UserApi, userConfig, utils) {
+  .controller('RegisterCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, UserApi, userConfig, utils, balanceService, settingService) {
   	var resendCountdown = utils.resendCountdown($scope);
 
     $scope.user = {

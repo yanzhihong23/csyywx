@@ -13,7 +13,7 @@ angular.module('csyywx')
 		} else {
 			$scope.step = {
 				index: 1,
-				title: '请输入新密码'
+				title: '请设置支付密码'
 			};
 		}
 
@@ -38,8 +38,13 @@ angular.module('csyywx')
 		var insertPassword = (function() {
 			var current = 0;
 			var len = $scope.inserts.length;
+			var timer;
 
 			function clearOneNumber(curr) {
+				if (timer) {
+					$timeout.cancel(timer);
+				}
+
 				$scope.ok = false;
 
 				curr.show = false;
@@ -52,7 +57,7 @@ angular.module('csyywx')
 				resetError();
 				$scope.ok = false;
 
-				$timeout(function() {
+				timer = $timeout(function() {
 					curr.show = true;
 				}, 300);
 				curr.number = num;
@@ -177,7 +182,7 @@ angular.module('csyywx')
 						insertPassword.reset();
 						$scope.step = {
 							index: 2,
-							title: '请确认新支付密码'
+							title: '请确认支付密码'
 						};
 					}
 					break;
@@ -204,6 +209,7 @@ angular.module('csyywx')
 										index: 0,
 										title: '请输入当前支付密码'
 									};
+									settingService.update();
 									utils.goBack();
 								}
 							});
