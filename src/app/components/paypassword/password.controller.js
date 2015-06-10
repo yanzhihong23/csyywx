@@ -38,8 +38,13 @@ angular.module('csyywx')
 		var insertPassword = (function() {
 			var current = 0;
 			var len = $scope.inserts.length;
+			var timer;
 
 			function clearOneNumber(curr) {
+				if (timer) {
+					$timeout.cancel(timer);
+				}
+
 				$scope.ok = false;
 
 				curr.show = false;
@@ -52,7 +57,7 @@ angular.module('csyywx')
 				resetError();
 				$scope.ok = false;
 
-				$timeout(function() {
+				timer = $timeout(function() {
 					curr.show = true;
 				}, 300);
 				curr.number = num;
