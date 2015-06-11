@@ -109,7 +109,7 @@ angular.module('csyywx')
 					amount: obj.amount,
 					transCode: obj.transCode || 1, // 1: bind and pay, 2: withdraw, 3: bind,
 					productCode: obj.productCode, // optional if transCode is 3
-					payPassword: obj.payPassword, // md5 encode
+					payPassword: md5.createHash(obj.payPassword), // md5 encode
 					systemMonthRateId: obj.systemMonthRateId // get from initOrder API
 				})
 			}).success(function(data) {

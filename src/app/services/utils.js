@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-	.factory('utils', function($ionicHistory, $timeout) {
+	.factory('utils', function($ionicHistory, $timeout, $ionicPopup) {
 		return {
 			param: function(obj) {
 				var str = [];
@@ -76,6 +76,18 @@ angular.module('csyywx')
 					};
 					countdown();
 				};
+			},
+			alert: function(obj) {
+				var alertPopup = $ionicPopup.alert({
+				  title: obj.title || '出错了哦~',
+				  template: obj.content || '',
+				  cssClass: 'text-center',
+				  okText: '确认',
+				  okType: 'button-assertive'
+				});
+				alertPopup.then(function(res) {
+					obj.callback && obj.callback();
+				});
 			}
 		}
 	})

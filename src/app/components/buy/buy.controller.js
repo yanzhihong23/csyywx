@@ -4,46 +4,48 @@ angular.module('csyywx')
 	.controller('BuyCtrl', function($scope, $state, $ionicLoading, UserApi, PayApi, userConfig, $timeout, orderService) {
 		var sessionId = userConfig.getSessionId(), productCode, level, orderId, hasPayPassword, card;
 
-		$scope.salaryDaySet = false;
-		$scope.inSalaryDays = false;
-		$scope.terms = [];
-		$scope.order = {
-			minAmount: 1,
-			amount: null,
-			range: 45.82,
-			reward: 0
-		};
-		// init
-		$ionicLoading.show();
-		PayApi.getProductCode({sessionId: ''})
-			.success(function(data) {
-				$ionicLoading.hide();
-				if (+data.flag === 1) {
-					// save product code
-					productCode = data.data.productCode;
-					$ionicLoading.show();
-					PayApi.initOrder({
-						sessionId: userConfig.getSessionId(),
-						productCode: productCode
-					}).success(function(data) {
-							$ionicLoading.hide();
-							if (+data.flag === 1) {
-								$scope.salaryDaySet = !!data.data.isSetSalaryDay;
-								$scope.inSalaryDays = !!data.data.isBetweenSalaryDate;
-								initRange(data.data.monthRates);
-								// save order id
-								orderId = data.data.orderid;
-								hasPayPassword = !!data.data.userDetail.hasPayPassword;
-								card = data.data.bindCardList && data.data.bindCardList[0];
+		var init = function() {
+			$scope.salaryDaySet = false;
+			$scope.inSalaryDays = false;
+			$scope.terms = [];
+			$scope.order = {
+				minAmount: 1,
+				amount: null,
+				range: 45.82,
+				reward: 0
+			};
+			// get data
+			$ionicLoading.show();
+			PayApi.getProductCode({sessionId: ''})
+				.success(function(data) {
+					$ionicLoading.hide();
+					if (+data.flag === 1) {
+						// save product code
+						productCode = data.data.productCode;
+						$ionicLoading.show();
+						PayApi.initOrder({
+							sessionId: userConfig.getSessionId(),
+							productCode: productCode
+						}).success(function(data) {
+								$ionicLoading.hide();
+								if (+data.flag === 1) {
+									$scope.salaryDaySet = !!data.data.isSetSalaryDay;
+									$scope.inSalaryDays = !!data.data.isBetweenSalaryDate;
+									initRange(data.data.monthRates);
+									// save order id
+									orderId = data.data.orderid;
+									hasPayPassword = !!data.data.userDetail.hasPayPassword;
+									card = data.data.bindCardList && data.data.bindCardList[0];
 
-								$timeout(function() {
-									rangePositionFix();
-								}, 100);
-							}
-						})
-					;
-				}
-			});
+									$timeout(function() {
+										rangePositionFix();
+									}, 100);
+								}
+							})
+						;
+					}
+				});
+		};
 
 		var initRange = function(data) {
 			$scope.terms = data.map(function(obj) {
@@ -122,7 +124,7 @@ angular.module('csyywx')
 			console.log($scope.order);
 			orderService.order = {
 				sessionId: sessionId,
-				orderid: orderId,
+				orderId: orderId,
 				productCode: productCode,
 				amount: $scope.order.amount,
 				systemMonthRateId: $scope.order.systemMonthRateId
@@ -145,5 +147,9 @@ angular.module('csyywx')
 				$state.go('tabs.pay');
 			}
 		};
+
+		$scope.$on('$ionicView.beforeEnter', function(){
+			init();
+    });
 
 	});
