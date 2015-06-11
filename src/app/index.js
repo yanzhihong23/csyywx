@@ -216,6 +216,15 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 					}
 				}
 			})
+      .state('tabs.setSalaryBuy', {
+        url: '/setSalaryBuy',
+        views: {
+          'buy-tab': {
+            templateUrl: 'app/components/salary/salary.html',
+            controller: 'SetSalaryCtrl'
+          }
+        }
+      })
     	/************************** info tab ***************************/
     	.state('tabs.balance', {
     		url: '/balance?type',
