@@ -1,7 +1,7 @@
 <ion-view view-title="购买" id="BUY">
 	<ion-content>
 		<form name="buyForm" ng-submit="submit()">
-			<div class="content-block-inner margin-top-0">
+			<div class="content-block-inner no-margin">
 				<p class="step1">1.期限及利率</p>
 				<div class="item range range-assertive">
 					<input type="range" name="term" min="1" max="99" ng-model="order.range">
@@ -18,11 +18,11 @@
 					<span class="input-label input-add">元</span>
 				</label>
 			</div>
-			<div class="padding-right text-right">
+			<div class="padding text-right">
 				<a ui-sref="tabs.limit" class="assertive">限额说明</a>
 			</div>
 
-			<div class="content-block-inner padding text-center">
+			<div class="content-block-inner padding text-center margin-top-0">
 				<p>预期收益：<span class="assertive"><span class="big">{{ order.reward | currency: ''}}</span>元</span></p>
 				<p>(预期年化收益率 {{ order.annualYield }}%)</p>
 			</div>
