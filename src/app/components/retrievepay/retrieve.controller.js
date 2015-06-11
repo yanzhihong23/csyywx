@@ -19,7 +19,7 @@ angular.module('csyywx')
     resetError();
     resetStep();
 
-    $rootScope.$on('payPassword', function(evt, password) {
+    $scope.$on('payPassword', function(evt, password) {
 
       if ($scope.step.index === 0) {
         step0(password);
@@ -31,7 +31,7 @@ angular.module('csyywx')
 
     function step0(password) {
       $scope.newPassword = password;
-      $rootScope.$broadcast('resetPayPassword');
+      clearPayPasswordWidget();
       $scope.step = step[1];
     }
 
@@ -42,7 +42,7 @@ angular.module('csyywx')
           show: true,
           content: '两次输入支付密码不相同'
         };
-        $rootScope.$broadcast('resetPayPassword');
+        clearPayPasswordWidget();
         resetStep();
       } else {
         $ionicLoading.show();
@@ -61,7 +61,7 @@ angular.module('csyywx')
             utils.alert({
               content: data.msg,
               callback: function() {
-                $rootScope.$broadcast('resetPayPassword');
+                clearPayPasswordWidget();
                 resetStep();
                 resetError();
               }
@@ -71,7 +71,7 @@ angular.module('csyywx')
       }
     }
 
-    $rootScope.$on('pressKey', function(evt, key) {
+    $scope.$on('keyboard', function(evt, key) {
       console.log("===%s pressed==", key);
       if ($scope.error.show) {
         resetError();
@@ -87,6 +87,10 @@ angular.module('csyywx')
         show: false,
         content: ''
       };
+    }
+
+    function clearPayPasswordWidget() {
+      $scope.$broadcast('resetPayPassword');
     }
 
   })

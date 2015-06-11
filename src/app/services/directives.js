@@ -68,7 +68,6 @@ angular.module('csyywx')
 					}
 
 					function reset() {
-						console.log(scope.inserts)
 						scope.inserts.forEach(function(self) {
 							deleteN(self);
 						});
