@@ -26,6 +26,11 @@ angular.module('csyywx')
 				$scope.vcodeSent = true;
 				// start count count
 				resendCountdown();
+			} else {
+				utils.alert({
+					title: '验证码发送失败',
+					content: data.msg
+				});
 			}
 		};
 
@@ -71,7 +76,12 @@ angular.module('csyywx')
 			PayApi.bind(params).success(function(data) {
 				$ionicLoading.hide();
 				if(+data.flag === 1) {
-
+					isPay ? $state.go('tabs.info') : utils.goBack();
+				} else {
+					utils.alert({
+						title: isPay ? '付款失败' : '绑定失败',
+						content: data.msg
+					});
 				}
 			});
 		};

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('BuyCtrl', function($scope, $state, $ionicLoading, UserApi, PayApi, userConfig, $timeout, orderService) {
+	.controller('BuyCtrl', function($scope, $state, $ionicLoading, UserApi, PayApi, userConfig, $timeout, orderService, utils) {
 		var sessionId = userConfig.getSessionId(), productCode, level, orderId, hasPayPassword, card;
 
 		var init = function() {
@@ -34,7 +34,7 @@ angular.module('csyywx')
 									initRange(data.data.monthRates);
 									// save order id
 									orderId = data.data.orderid;
-									hasPayPassword = !!data.data.userDetail.hasPayPassword;
+									hasPayPassword = !!+data.data.userDetail.hasPayPassword;
 									card = data.data.bindCardList && data.data.bindCardList[0];
 
 									$timeout(function() {
@@ -132,7 +132,14 @@ angular.module('csyywx')
 
 			if(card) {
 				if(!hasPayPassword) {
-					$state.go('tabs.setPayPassword');
+					utils.confirm({
+						title: '温馨提示',
+						content: '您还未设置支付密码',
+						okText: '去设置',
+						onOk: function() {
+							$state.go('tabs.setPayPasswordBuy');
+						}
+					})
 				} else {
 					// go to quick pay
 					orderService.order.userCardCode = card.userCardCode;

@@ -15,10 +15,7 @@ angular.module('csyywx')
 						var data = data.data.userData;
 						self.setting.realname = data.realName;
 						self.setting.phone = data.mobileNumber;
-						if(data.bankList) {
-							self.setting.card = data.bankList[0].bankName + '(尾号' + data.bankList[0].cardCode + ')';
-						}
-
+						self.setting.card = data.bankList ? data.bankList[0].bankName + '(尾号' + data.bankList[0].cardCode + ')' : null;
 						self.setting.payPassword = !!(+data.hasPayPassword);
 						self.setting.salaryDay = +data.salaryDay;
 					}

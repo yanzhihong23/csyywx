@@ -180,6 +180,15 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
           }
         }
       })
+      .state('tabs.setPayPasswordBuy', {
+        url: '/setPayPasswordBuy',
+        views: {
+          'buy-tab': {
+            templateUrl: 'app/components/paypassword/password.html',
+            controller: 'PayPasswordCtrl'
+          }
+        }
+      })
     	/************************** info tab ***************************/
     	.state('tabs.balance', {
     		url: '/balance?type',

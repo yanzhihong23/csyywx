@@ -79,14 +79,31 @@ angular.module('csyywx')
 			},
 			alert: function(obj) {
 				var alertPopup = $ionicPopup.alert({
-				  title: obj.title || '出错了哦~',
+				  title: obj.title || '温馨提示',
 				  template: obj.content || '',
 				  cssClass: 'text-center',
-				  okText: '确认',
+				  okText: obj.okText || '确认',
 				  okType: 'button-assertive'
 				});
 				alertPopup.then(function(res) {
 					obj.callback && obj.callback();
+				});
+			},
+			confirm: function(obj) {
+				var confirmPopup = $ionicPopup.confirm({
+				  title: obj.title || '温馨提示',
+				  template: obj.content || '',
+				  cssClass: 'text-center',
+				  okText: obj.okText || '确认',
+				  okType: 'button-assertive',
+				  cancelText: obj.cancelText || '取消'
+				});
+				confirmPopup.then(function(res) {
+					if(res) {
+						obj.onOk && obj.onOk();
+					} else {
+						obj.onCancel && obj.onCancel();
+					}
 				});
 			}
 		}
