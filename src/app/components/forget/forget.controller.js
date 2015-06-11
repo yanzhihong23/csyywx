@@ -22,7 +22,6 @@ angular.module('csyywx')
           if(+data.flag === 1) {
             resendCountdown();
             $scope.user.sessionId = data.data.sessionId;
-            userConfig.setSessionId(data.data.sessionId);
           }
         });
     };
@@ -43,6 +42,7 @@ angular.module('csyywx')
             $state.go('tabs.retrievePayPassword');
           } else {
             console.log($scope.user.phone)
+            userConfig.setSessionId(data.data.sessionId);
             $state.go('tabs.retrievePassword', {
               phone: $scope.user.phone
             });

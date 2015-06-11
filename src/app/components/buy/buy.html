@@ -9,7 +9,7 @@
 							 style="-webkit-transform: translate3d({{ order.left }}, 0, 0);transform: translate3d({{ order.left }}, 0, 0);">{{ order.desc }}</div>
 				</div>
 				<ul class="terms range">
-					<li ng-repeat="item in terms" ng-class="{ 'assertive':item.active }">{{ item.name }}</li>
+					<li ng-repeat="item in terms" ng-class="{ 'active-position assertive':item.active }">{{ item.name }}</li>
 				</ul>
 				<a class="underline add-interest text-right assertive padding" ng-if="!salaryDaySet" ui-sref="tabs.setSalaryBuy">加息2%？设置工资发放日</a>
 				<label class="item item-input step2">
