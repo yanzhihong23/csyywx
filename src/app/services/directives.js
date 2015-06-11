@@ -1,19 +1,19 @@
 'use strict';
 
 angular.module('csyywx')
-	.directive('keyboard', function($rootScope) {
+	.directive('keyboard', function() {
 		return {
 			restrict: 'E',
 			templateUrl: 'app/templates/keyboard.html',
 			link: function(scope, element, attr) {
 				angular.element(element).parent().addClass('has-keyboard');
 				scope.enter = function(num) {
-					$rootScope.$broadcast('keyboard', num);
+					scope.$emit('keyboard', num);
 				};
 			}
 		}
 	})
-	.directive('payPassword', function($rootScope, $timeout) {
+	.directive('payPassword', function($timeout) {
 		return {
 			restrict: 'E',
 			// require: 'ngModel',
@@ -64,9 +64,6 @@ angular.module('csyywx')
 							curr.show = true;
 						}, 300);
 						curr.number = num;
-
-						$rootScope.$broadcast('pressKey', num);
-
 						current++;
 					}
 
@@ -82,7 +79,7 @@ angular.module('csyywx')
 								deleteN(scope.inserts[current-1]);
 							}
 						} else if(num === 'ok') {
-							$rootScope.$broadcast('payPassword', getPassword());
+							scope.$emit('payPassword', getPassword());
 						} else {
 							if (current < len) {
 								addN(scope.inserts[current], num);
@@ -102,11 +99,11 @@ angular.module('csyywx')
 
 				})();
 
-				$rootScope.$on('keyboard', function(evt, num) {
+				scope.$on('keyboard', function(evt, num) {
 					insertPassword.insertNumber(num);
 				});
 
-				$rootScope.$on('resetPayPassword', function() {
+				scope.$on('resetPayPassword', function() {
 					insertPassword.reset();
 				})
 			}

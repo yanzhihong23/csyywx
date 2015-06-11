@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('QuickpayCtrl', function($scope, $rootScope, $state, orderService, PayApi, $ionicLoading, utils, balanceService) {
+	.controller('QuickpayCtrl', function($scope, $state, orderService, PayApi, $ionicLoading, utils, balanceService) {
 		$scope.order = orderService.order;
 
-		$rootScope.$on('payPassword', function(evt, password) {
+		$scope.$on('payPassword', function(evt, password) {
 			$scope.order.payPassword = password;
 
 			$ionicLoading.show();
@@ -19,7 +19,7 @@ angular.module('csyywx')
 						title: '付款失败',
 						content: data.msg,
 						callback: function() {
-							$rootScope.$broadcast('resetPayPassword');
+							$scope.$emit('resetPayPassword');
 						}
 					});
 				}
