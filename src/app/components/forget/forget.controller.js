@@ -1,17 +1,17 @@
 'use strict';
 
 angular.module('csyywx')
-  .controller('ForgetPasswordCtrl', function($scope, $state, $stateParams, $ionicLoading, UserApi, userConfig, utils) {
+  .controller('ForgetPasswordCtrl', function($scope, $state, $stateParams, $ionicLoading, UserApi, userConfig, utils, settingService) {
     var resendCountdown = utils.resendCountdown($scope);
 
     var checkCode = 2015;
     $scope.pay = +$stateParams.type === 3;   // 3支付
 
     $scope.user = {
-      phone: $stateParams.phone,
+      phone: $stateParams.phone || userConfig.getUser().phone,
       invalidVcode: false,
       approach: $stateParams.type,
-      certificateNumber: ''
+      certificateNumber: '350322198909235217'
     };
 
 
