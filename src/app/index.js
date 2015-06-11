@@ -201,7 +201,7 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 			.state('tabs.forgetPasswordBuy', {
 				url: '/forgetPasswordBuy?phone&type',
 				views: {
-					'home-tab': {
+					'buy-tab': {
 						templateUrl: 'app/components/forget/forget.html',
 						controller: 'ForgetPasswordCtrl'
 					}
@@ -210,7 +210,7 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 			.state('tabs.retrievePayPassword', {
 				url: '/retrievePayPassword',
 				views: {
-					'home-tab': {
+					'buy-tab': {
 						templateUrl: 'app/components/retrievepay/retrieve.html',
 						controller: 'RetrievePayPasswordCtrl'
 					}

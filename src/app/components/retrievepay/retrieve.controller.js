@@ -20,14 +20,11 @@ angular.module('csyywx')
     resetStep();
 
     $rootScope.$on('payPassword', function(evt, password) {
-      console.log(password);
 
       if ($scope.step.index === 0) {
-        console.log("0")
         step0(password);
       } else if ($scope.step.index === 1) {
         step1(password);
-        console.log("1")
       }
 
     });
