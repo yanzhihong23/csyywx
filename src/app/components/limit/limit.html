@@ -1,0 +1,24 @@
+<ion-view view-title="限额说明">
+	<ion-content>
+		<div class="padding">
+			<button class="button button-assertive">首次购买</button>
+			<button class="button button-assertive">再次购买</button>
+		</div>
+		
+
+		<div class="list">
+			<div class="item white-bg" ng-repeat="item in limit.firstRecharge">
+				<div>{{item.bankName}}</div>
+				<small class="gray">{{item.rechargeExplain}}</small>
+			</div>
+		</div>
+
+
+		<div class="list">
+			<div class="item white-bg" ng-repeat="item in limit.quickRecharge">
+				<div>{{item.bankName}}</div>
+				<small class="gray">{{item.rechargeExplain}}</small>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

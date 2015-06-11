@@ -162,6 +162,15 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
     			}
     		}
     	})
+      .state('tabs.limit', {
+        url: '/limit',
+        views: {
+          'buy-tab': {
+            templateUrl: 'app/components/limit/limit.html',
+            controller: 'LimitCtrl'
+          }
+        }
+      })
       .state('tabs.pay', {
         url: '/pay',
         views: {

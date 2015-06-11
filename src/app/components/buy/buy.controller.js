@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('BuyCtrl', function($scope, $state, $ionicLoading, UserApi, PayApi, userConfig, $timeout, orderService, utils) {
+	.controller('BuyCtrl', function($scope, $state, $ionicLoading, UserApi, PayApi, userConfig, $timeout, orderService, utils, localStorageService) {
 		var sessionId = userConfig.getSessionId(), productCode, level, orderId, hasPayPassword, card;
 
 		var init = function() {
@@ -40,6 +40,8 @@ angular.module('csyywx')
 									$timeout(function() {
 										rangePositionFix();
 									}, 100);
+
+									localStorageService.add('limit', data.data.limitExplain);
 								}
 							})
 						;
