@@ -110,6 +110,14 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 	        }
 	      }
     	})
+			.state('tabs.userAgreement', {
+				url: '/userAgreement',
+				views: {
+					'home-tab': {
+						templateUrl: 'app/components/agreements/user-agreement.html'
+					}
+				}
+			})
     	.state('tabs.login', {
     		url: "/login?phone",
 	      views: {
@@ -138,14 +146,6 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 				}
 			})
     	/************************** buy tab ***************************/
-    	.state('tabs.userAgreement', {
-    		url: '/userAgreement',
-    		views: {
-    			'buy-tab': {
-    				templateUrl: 'app/components/agreements/user-agreement.html'
-    			}
-    		}
-    	})
     	.state('tabs.serviceAgreement', {
     		url: '/serviceAgreement',
     		views: {
