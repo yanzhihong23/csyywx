@@ -32,10 +32,26 @@ angular.module('csyywx')
 			}).success(function(data) {
 				if(+data.flag === 1) {
 					$scope.items = data.data.assetList.map(function(obj) {
+						var status;
+						switch(+obj.status) {
+							case 1:
+								status = '转活期';
+								break;
+							case 2:
+								status = '提现';
+								break;
+							case 3:
+								status = '转定期';
+								break;
+							default:
+								status = '买入';
+						}
+
 						return {
 							date: $filter('date')(new Date(obj.investDate), 'yyyy-MM-dd'),
 							desc: obj.termDesc,
-							amount: obj.investAmount
+							amount: obj.investAmount,
+							status: status
 						};
 					});
 				}
