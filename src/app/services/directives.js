@@ -65,6 +65,8 @@ angular.module('csyywx')
 						}, 300);
 						curr.number = num;
 
+						$rootScope.$broadcast('pressKey', num);
+
 						current++;
 					}
 
