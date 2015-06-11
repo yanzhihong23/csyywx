@@ -204,9 +204,9 @@ angular.module('csyywx')
 					withdrawAmount: obj.arrivalAmount,
 					chargeAmount: obj.fee,
 					amount: obj.amount,
-					provinceId: obj.provinceId,
-					cityId: obj.cityId,
-					bankBranchId: obj.bankBranchId
+					provinceId: obj.provinceId || '',
+					cityId: obj.cityId || '',
+					bankBranchId: obj.bankBranchId || ''
 				})
 			}).success(function(data) {
 				// isBindCard, productEntity, bankCardList, orderid

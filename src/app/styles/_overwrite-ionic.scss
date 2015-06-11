@@ -15,14 +15,6 @@
   }
 }
 
-
-.slider-pager .slider-pager-page {
-  
-  &.active {
-
-  }
-}
-
 input[disabled] {
 	background: $white;
 }
@@ -48,4 +40,9 @@ input[disabled] {
 
 .item-note.blue{
 	color: $blue;
+}
+
+a, a:hover, a:active, a:focus{
+  outline: none;
+  text-decoration: none;
 }

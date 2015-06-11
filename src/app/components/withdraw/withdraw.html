@@ -1,0 +1,41 @@
+<ion-view view-title="提现">
+	<ion-content>
+		<form ng-submit="submit()" name="withdrawForm">
+			<ul class="list padding-top">
+				<li class="item item-input item-select" ng-click="selectItem()">
+					<span class="input-label">提现项目</span>
+					<span>{{item.productName}}</span>
+				</li>
+			</ul>
+
+			<ul class="list">
+				<li class="item item-input">
+					<span class="input-label">可提现金额</span>
+					<span class="item-note assertive">{{balanceAvailable | currency:''}}</span>
+				</li>
+			</ul>
+
+			<ul class="list no-margin">
+				<li class="item item-input">
+					<span class="input-label">提现金额</span>
+		    	<input type="text" ng-model="withdraw.amount" placeholder="≥2.00" clear-input required>
+				</li>
+			</ul>
+
+			<div class="row">
+				<div class="col">手续费 <span class="assertive">{{withdraw.fee | currency:''}}</span>元</div>
+				<div class="col">实际到账 <span class="assertive">{{withdraw.result | currency:''}}</span>元</div>
+			</div>
+
+			<ul class="list">
+				<li class="item item-input" ng-click="showTip()">
+					<span class="input-label">温馨提示</span>
+				</li>
+			</ul>
+
+			<div class="padding">
+				<button type="submit" class="button button-full button-assertive" ng-disabled="withdrawForm.$invalid || withdraw.invalid">提现</button>
+			</div>
+		</form>
+	</ion-content>
+</ion-view>

@@ -297,6 +297,15 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
           }
         }
       })
+      .state('tabs.withdraw', {
+        url: '/withdraw',
+        views: {
+          'info-tab': {
+            templateUrl: 'app/components/withdraw/withdraw.html',
+            controller: 'WithdrawCtrl'
+          }
+        }
+      })
 
 			;
     $urlRouterProvider.otherwise('/tab/home');
