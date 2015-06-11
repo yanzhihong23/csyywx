@@ -11,19 +11,6 @@ angular.module('csyywx')
       repeatPassword: ''
     };
 
-    $scope.showAlert = function(content) {
-      var alertPopup = $ionicPopup.alert({
-        title: '错误提醒!',
-        template: content,
-        cssClass: 'text-center',
-        okText: '确认',
-        okType: 'button-assertive'
-      });
-      alertPopup.then(function(res) {
-        console.log('close error alert');
-      });
-    };
-
     $scope.submit = function() {
       $ionicLoading.show();
       UserApi.changePassword({
@@ -34,9 +21,16 @@ angular.module('csyywx')
         $ionicLoading.hide();
         console.log(data);
         if (+data.flag === 1) {
-          utils.goBack();
+          utils.alert({
+            content: '密码修改成功',
+            callback: function() {
+              utils.goBack();
+            }
+          });
         } else {
-          $scope.showAlert(data.msg);
+          utils.alert({
+            content: data.msg
+          });
         }
       });
     }
