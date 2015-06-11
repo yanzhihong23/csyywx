@@ -20,9 +20,6 @@ angular.module('csyywx')
     			});
 
     			$rootScope.$broadcast('loginSuc');
-          // update balance and setting services
-          balanceService.update();
-          settingService.update();
     		} else {
 					utils.alert({
 						content: data.msg
