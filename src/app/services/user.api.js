@@ -177,7 +177,7 @@ angular.module('csyywx')
 				headers: headers,
 				data: utils.param({
 					sessionId: obj.sessionId,
-					newPassword: obj.newPassword
+					newPassword: md5.createHash(obj.newPassword)
 				})
 			}).success(function(data) {
 				

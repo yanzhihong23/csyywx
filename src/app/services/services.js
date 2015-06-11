@@ -42,7 +42,7 @@ angular.module('csyywx')
 
 		this.getBasicInfo = function() {
 			return localStorageService.get('basicInfo');
-		}
+		};
 
 		this.logout = function() {
 			localStorageService.remove('isLogined');

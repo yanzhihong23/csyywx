@@ -22,6 +22,7 @@ angular.module('csyywx')
           if(+data.flag === 1) {
             resendCountdown();
             $scope.user.sessionId = data.data.sessionId;
+            userConfig.setSessionId(data.data.sessionId);
           }
         });
     };
@@ -41,7 +42,10 @@ angular.module('csyywx')
           if ($scope.pay) {
             $state.go('tabs.retrievePayPassword');
           } else {
-            $state.go('tabs.retrievePassword');
+            console.log($scope.user.phone)
+            $state.go('tabs.retrievePassword', {
+              phone: $scope.user.phone
+            });
           }
         } else {
           alert(data.msg)

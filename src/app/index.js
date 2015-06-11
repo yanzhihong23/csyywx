@@ -137,7 +137,7 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 				}
 			})
 			.state('tabs.retrievePassword', {
-				url: '/retrievePassword',
+				url: '/retrievePassword?phone',
 				views: {
 					'home-tab': {
 						templateUrl: 'app/components/retrieve/retrieve.html',

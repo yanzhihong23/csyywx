@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('csyywx')
-  .controller('RetrievePasswordCtrl', function($scope, $ionicLoading, userConfig, utils, UserApi) {
+  .controller('RetrievePasswordCtrl', function($scope, $state, $stateParams, $ionicLoading, userConfig, utils, UserApi) {
+
+    $scope.user = {
+      phone: $stateParams.phone
+    };
 
     var sessionId = userConfig.getSessionId();
 
@@ -36,7 +40,16 @@ angular.module('csyywx')
         if (+data.flag === 1) {
           utils.alert({
             content: '修改成功',
-            callback: utils.goBack
+            callback: function() {
+                //utils.goBack();
+              userConfig.setUser({
+                phone: $scope.user.phone,
+                password: $scope.pwd.newPassword
+              });
+              userConfig.autoLogin();
+              utils.disableBack();
+              $state.go('tabs.home');
+            }
           });
         } else {
           utils.alert({
