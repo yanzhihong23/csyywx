@@ -1,13 +1,17 @@
 'use strict';
 
 angular.module('csyywx')
-  .controller('ForgetPasswordCtrl', function($scope, $stateParams, $ionicLoading, UserApi, utils) {
+  .controller('ForgetPasswordCtrl', function($scope, $state, $stateParams, $ionicLoading, UserApi, userConfig, utils) {
     var resendCountdown = utils.resendCountdown($scope);
+
+    var checkCode = 2015;
+    $scope.pay = $stateParams.type === 3;
 
     $scope.user = {
       phone: $stateParams.phone,
       invalidVcode: false,
-      approach: 2
+      approach: $stateParams.type,
+      certificateNumber: ''
     };
 
 
@@ -15,7 +19,6 @@ angular.module('csyywx')
       $ionicLoading.show();
       UserApi.sendCheckCode($scope.user)
         .success(function(data) {
-          console.log("ss")
           $ionicLoading.hide();
           if(+data.flag === 1) {
             resendCountdown();
@@ -25,7 +28,22 @@ angular.module('csyywx')
     };
 
     $scope.submit = function() {
-
+      $ionicLoading.show();
+      UserApi.securityCheck({
+        sessionId: $scope.user.sessionId,
+        phone: $scope.user.phone,
+        certificateNumber: $scope.pay ? $scope.user.certificateNumber : '', // id, for retrieve pay password
+        checkCode: checkCode, // 2015, for dev test,
+        type: +$stateParams.type-1 // 1:login, 2: pay
+      }).success(function(data) {
+        $ionicLoading.hide();
+        console.log(data);
+        if (+data.flag === 1) {
+          $state.go('tabs.retrievePassword');
+        } else {
+          alert(data.msg)
+        }
+      });
     };
 
   })

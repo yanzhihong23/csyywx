@@ -1,0 +1,23 @@
+<ion-view view-title="重置密码">
+  <ion-content>
+
+    <form name="retrieveForm" ng-submit="submit()">
+
+      <div class="list content-block-inner">
+        <label class="item item-input">
+          <input type="password" ng-pattern="/^[\s\S]{6,16}$/" ng-change="passwordValidate(pwd.newPassword)" placeholder="请输入新登录密码" ng-model="pwd.newPassword" required>
+        </label>
+        <label class="item item-input">
+          <input type="password" ng-pattern="/^[\s\S]{6,16}$/" placeholder="请确认登录密码" ng-model="pwd.repeatPassword" required>
+        </label>
+      </div>
+      <p class="assertive ion ion-flag padding-horizontal"><small>请输入6-16位数字、字母和字符中的两种！</small></p>
+
+      <div class="padding-horizontal">
+        <button type="submit" class="button button-full button-assertive" ng-disabled="retrieveForm.$invalid || pwd.newPassword !== pwd.repeatPassword || invalidVcode">确认修改</button>
+      </div>
+
+    </form>
+
+  </ion-content>
+</ion-view>
