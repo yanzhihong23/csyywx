@@ -5,7 +5,7 @@ angular.module('csyywx')
     var resendCountdown = utils.resendCountdown($scope);
 
     var checkCode = 2015;
-    $scope.pay = $stateParams.type === 3;
+    $scope.pay = +$stateParams.type === 3;   // 3支付
 
     $scope.user = {
       phone: $stateParams.phone,
@@ -39,7 +39,11 @@ angular.module('csyywx')
         $ionicLoading.hide();
         console.log(data);
         if (+data.flag === 1) {
-          $state.go('tabs.retrievePassword');
+          if ($scope.pay) {
+            $state.go('tabs.retrievePayPassword');
+          } else {
+            $state.go('tabs.retrievePassword');
+          }
         } else {
           alert(data.msg)
         }

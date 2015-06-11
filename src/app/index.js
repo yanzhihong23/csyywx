@@ -137,15 +137,6 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 					}
 				}
 			})
-			.state('tabs.retrievePayPassword', {
-				url: '/retrievePayPassword',
-				views: {
-					'home-tab': {
-						templateUrl: 'app/components/retrievepay/retrieve.html',
-						controller: 'RetrievePayPasswordCtrl'
-					}
-				}
-			})
     	/************************** buy tab ***************************/
     	.state('tabs.userAgreement', {
     		url: '/userAgreement',
@@ -207,6 +198,24 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
           }
         }
       })
+			.state('tabs.forgetPasswordBuy', {
+				url: '/forgetPasswordBuy?phone&type',
+				views: {
+					'home-tab': {
+						templateUrl: 'app/components/forget/forget.html',
+						controller: 'ForgetPasswordCtrl'
+					}
+				}
+			})
+			.state('tabs.retrievePayPassword', {
+				url: '/retrievePayPassword',
+				views: {
+					'home-tab': {
+						templateUrl: 'app/components/retrievepay/retrieve.html',
+						controller: 'RetrievePayPasswordCtrl'
+					}
+				}
+			})
     	/************************** info tab ***************************/
     	.state('tabs.balance', {
     		url: '/balance?type',
