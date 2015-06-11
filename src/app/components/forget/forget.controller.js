@@ -4,14 +4,13 @@ angular.module('csyywx')
   .controller('ForgetPasswordCtrl', function($scope, $state, $stateParams, $ionicLoading, UserApi, userConfig, utils, settingService) {
     var resendCountdown = utils.resendCountdown($scope);
 
-    var checkCode = 2015;
     $scope.pay = +$stateParams.type === 3;   // 3支付
 
     $scope.user = {
       phone: $stateParams.phone || userConfig.getUser().phone,
       invalidVcode: false,
       approach: $stateParams.type,
-      certificateNumber: '350322198909235217'
+      certificateNumber: ''
     };
 
 
@@ -33,7 +32,7 @@ angular.module('csyywx')
         sessionId: $scope.user.sessionId,
         phone: $scope.user.phone,
         certificateNumber: $scope.pay ? $scope.user.certificateNumber : '', // id, for retrieve pay password
-        checkCode: checkCode, // 2015, for dev test,
+        checkCode: $scope.user.vcode, // 2015, for dev test,
         type: +$stateParams.type-1 // 1:login, 2: pay
       }).success(function(data) {
         $ionicLoading.hide();

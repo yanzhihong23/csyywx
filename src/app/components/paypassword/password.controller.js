@@ -29,14 +29,14 @@ angular.module('csyywx')
 		$scope.newPassword = '';
 		$scope.repeatPassword = '';
 
-		$rootScope.$on('pressKey', function(evt, key) {
+		$scope.$on('keyboard', function(evt, key) {
 			console.log("===%s pressed==", key);
 			if ($scope.error.show) {
 				resetError();
 			}
 		});
 
-		$rootScope.$on('payPassword', function(evt, password) {
+		$scope.$on('payPassword', function(evt, password) {
 
 			switch ($scope.step.index) {
 				case 0:
@@ -70,7 +70,7 @@ angular.module('csyywx')
 						content: data.msg
 					};
 				}
-				$rootScope.$broadcast('resetPayPassword');
+				clearPayPasswordWidget();
 			})
 		}
 
@@ -85,7 +85,7 @@ angular.module('csyywx')
 				console.log("=== step1 right");
 				$scope.step = step[2];
 			}
-			$rootScope.$broadcast('resetPayPassword');
+			clearPayPasswordWidget();
 		}
 
 		function step2(password) {
@@ -95,7 +95,7 @@ angular.module('csyywx')
 					show: true,
 					content: '两次输入密码不相同'
 				};
-				$rootScope.$broadcast('resetPayPassword');
+				clearPayPasswordWidget();
 				$scope.step = step[1];
 			} else {
 				if (!hasSetted) {
@@ -119,7 +119,7 @@ angular.module('csyywx')
 					utils.alert({
 						content: '支付密码设置成功',
 						callback: function() {
-							$rootScope.$broadcast('resetPayPassword');
+							clearPayPasswordWidget();
 							$scope.step = step[0];
 							utils.goBack();
 						}
@@ -128,7 +128,7 @@ angular.module('csyywx')
 					utils.alert({
 						content: data.msg,
 						callback: function() {
-							$rootScope.$broadcast('resetPayPassword');
+							clearPayPasswordWidget();
 							resetStep();
 							resetError();
 						}
@@ -151,7 +151,7 @@ angular.module('csyywx')
 					utils.alert({
 						content: '支付密码设置成功',
 						callback: function() {
-							$rootScope.$broadcast('resetPayPassword');
+							clearPayPasswordWidget();
 							utils.goBack();
 						}
 					});
@@ -159,7 +159,7 @@ angular.module('csyywx')
 					utils.alert({
 						content: data.msg,
 						callback: function() {
-							$rootScope.$broadcast('resetPayPassword');
+							clearPayPasswordWidget();
 							$scope.step = step[1];
 							resetError();
 						}
@@ -177,6 +177,10 @@ angular.module('csyywx')
 				show: false,
 				content: ''
 			};
+		}
+
+		function clearPayPasswordWidget() {
+			$scope.$broadcast('resetPayPassword');
 		}
 
 	})

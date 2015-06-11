@@ -19,7 +19,7 @@ angular.module('csyywx')
 						title: '付款失败',
 						content: data.msg,
 						callback: function() {
-							$scope.$emit('resetPayPassword');
+							$scope.$broadcast('resetPayPassword');
 						}
 					});
 				}
