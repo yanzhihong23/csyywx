@@ -48,7 +48,7 @@ angular.module('csyywx')
               });
               userConfig.autoLogin();
               utils.disableBack();
-              $state.go('tabs.home');
+              utils.goHome();
             }
           });
         } else {

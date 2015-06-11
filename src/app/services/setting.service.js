@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-	.service('settingService', function(UserApi, userConfig) {
+	.service('settingService', function(UserApi, userConfig, $rootScope) {
 		var self = this;
 
 		this.setting = {};
@@ -21,6 +21,8 @@ angular.module('csyywx')
 					}
 				});
 		};
+
+		$rootScope.$on('loginSuc', this.update);
 
 		this.update();
 	})

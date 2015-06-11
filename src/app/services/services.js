@@ -55,7 +55,7 @@ angular.module('csyywx')
 			$ionicHistory.clearCache();
 		};
 
-		function autoLogin(broadcast) {
+		function autoLogin() {
 			var user = localStorageService.get('user');
 			if(user) {
 				UserApi.login(user)
@@ -67,7 +67,7 @@ angular.module('csyywx')
 							// self.isLogined = true;
 							self.setLoginStatus(true);
 							self.setBasicInfo(data.data);
-							if(broadcast) $rootScope.$broadcast('loginSuc');
+							$rootScope.$broadcast('loginSuc');
 							console.log('----------- autoLogin success -----------');
 						}
 					});
@@ -79,7 +79,7 @@ angular.module('csyywx')
 		};
 
 	})
-	.service('balanceService', function(userConfig, AccountApi) {
+	.service('balanceService', function(userConfig, AccountApi, $rootScope) {
 		var self = this;
 
 		this.balance = {};
@@ -99,6 +99,8 @@ angular.module('csyywx')
 					}
 				})
 		};
+
+		$rootScope.$on('loginSuc', this.update);
 
 		this.update();
 	})

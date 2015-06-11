@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-	.factory('utils', function($ionicHistory, $timeout, $ionicPopup) {
+	.factory('utils', function($ionicHistory, $state, $timeout, $ionicPopup) {
 		return {
 			param: function(obj) {
 				var str = [];
@@ -36,6 +36,11 @@ angular.module('csyywx')
 				  disableAnimate: false,
 				  disableBack: true
 				});
+			},
+			goHome: function() {
+				$state.go('tabs.home');
+				$ionicHistory.clearHistory();
+				$ionicHistory.clearCache();
 			},
 			goBack: function(depth) {
 				if(depth) {
