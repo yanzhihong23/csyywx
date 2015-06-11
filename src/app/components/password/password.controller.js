@@ -5,6 +5,13 @@ angular.module('csyywx')
 
     var sessionId = userConfig.getSessionId();
 
+    $scope.invalidVcode = false;
+
+    $scope.passwordValidate = function(password) {
+      return $scope.invalidVcode = !utils.isPasswordValid(password);
+    };
+
+
     $scope.pwd = {
       currentPassword: '',
       newPassword: '',

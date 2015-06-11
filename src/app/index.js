@@ -120,11 +120,29 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 	      }
     	})
 			.state('tabs.forgetPassword', {
-				url: '/forgetPassword?phone',
+				url: '/forgetPassword?phone&type',
 				views: {
 					'home-tab': {
 						templateUrl: 'app/components/forget/forget.html',
 						controller: 'ForgetPasswordCtrl'
+					}
+				}
+			})
+			.state('tabs.retrievePassword', {
+				url: '/retrievePassword',
+				views: {
+					'home-tab': {
+						templateUrl: 'app/components/retrieve/retrieve.html',
+						controller: 'RetrievePasswordCtrl'
+					}
+				}
+			})
+			.state('tabs.retrievePayPassword', {
+				url: '/retrievePayPassword',
+				views: {
+					'home-tab': {
+						templateUrl: 'app/components/retrievepay/retrieve.html',
+						controller: 'RetrievePayPasswordCtrl'
 					}
 				}
 			})
