@@ -14,37 +14,37 @@
 			<div class="col text-right">{{balance.total | currency: ''}}元</div>
 		</div>
 	
-		<div class="each-item border row white-bg content-block-inner">
+		<div class="each-item border row row-center white-bg content-block-inner">
 			<div class="col-80">
-				<div class="row" ng-click="viewBalanceDetail('regular')">
+				<div class="row row-center" ng-click="viewBalanceDetail('regular')">
 					<div class="col">定期资产<br><small class="gray">到期后转活期</small></div>
 					<div class="col col-center text-right">{{balance.regular | currency: ''}}元</div>
 				</div>
 				<i class="triangle-svg"><img ng-src="assets/images/triangle.svg" alt=""></i>
 			</div>
-			<a class="col-20 col-center text-center button-assertive button button-clear middle" ui-sref="tabs.buy">投资</a>
+			<a class="col-20 col-center text-center assertive middle" ui-sref="tabs.buy">投资</a>
 		</div>
 
-		<div class="each-item border row white-bg content-block-inner">
+		<div class="each-item border row row-center white-bg content-block-inner">
 			<div class="col-80">
-				<div class="row" ng-click="viewBalanceDetail('demand')">
+				<div class="row row-center" ng-click="viewBalanceDetail('demand')">
 					<div class="col">活期资产<br><small class="gray">按年化8.88%计息</small></div>
 					<div class="col col-center text-right">{{balance.demand | currency: ''}}元</div>
 				</div>
 				<i class="triangle-svg"><img ng-src="assets/images/triangle.svg" alt=""></i>
 			</div>
-			<a class="col-20 col-center text-center button-assertive button button-clear middle" ui-sref="tabs.withdraw">提现</a>
+			<a class="col-20 col-center text-center assertive middle" ui-sref="tabs.withdraw">提现</a>
 		</div>
 
-		<div class="each-item border row white-bg content-block-inner">
+		<div class="each-item border row row-center white-bg content-block-inner">
 			<div class="col-80">
-				<div class="row" ng-click="viewExperience()">
+				<div class="row row-center" ng-click="viewExperience()">
 					<div class="col">体验金<br><small class="gray">分享涨体验金</small></div>
 					<div class="col col-center text-right">{{balance.experience | currency: ''}}元</div>
 				</div>
 				<i class="triangle-svg"><img ng-src="assets/images/triangle.svg" alt=""></i>
 			</div>
-			<a class="col-20 col-center text-center button-assertive button button-clear middle" ng-click="viewExperience()">分享</a>
+			<a class="col-20 col-center text-center assertive middle" ng-click="viewExperience()">分享</a>
 		</div>
 
 	</ion-content>
