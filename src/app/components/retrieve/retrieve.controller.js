@@ -9,11 +9,8 @@ angular.module('csyywx')
 
     var sessionId = userConfig.getSessionId();
 
-    $scope.invalidVcode = false;
 
-    $scope.passwordValidate = function(password) {
-      return $scope.invalidVcode = !utils.isPasswordValid(password);
-    };
+    $scope.passwordPattern = utils.passwordPattern;
 
 
     $scope.pwd = {
@@ -41,7 +38,6 @@ angular.module('csyywx')
           utils.alert({
             content: '修改成功',
             callback: function() {
-                //utils.goBack();
               userConfig.setUser({
                 phone: $scope.user.phone,
                 password: $scope.pwd.newPassword
@@ -53,8 +49,7 @@ angular.module('csyywx')
           });
         } else {
           utils.alert({
-            content: data.msg,
-            callback: clear
+            content: data.msg
           });
         }
       });

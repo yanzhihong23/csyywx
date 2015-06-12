@@ -68,7 +68,19 @@ angular.module('csyywx')
 				if(+data.flag === 1) {
 					// update setting service
 					settingService.update();
-					utils.goBack();
+					utils.alert({
+						content: '你的“那几天”设置成功',
+						callback: function() {
+							utils.goBack();
+						}
+					});
+				} else {
+					utils.alert({
+						content: data.msg,
+						callback: function() {
+							reset();
+						}
+					});
 				}
 			})
 		};
