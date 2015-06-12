@@ -5,11 +5,11 @@
 
       <div class="list content-block-inner margin-bottom">
         <label class="item item-input item-stacked-label">
-          <span class="input-label">新的登录密码：<small class="assertive" ng-show="retrieveForm.new.$dirty && retrieveForm.new.$invalid">*密码不符合规则</small></span>
+          <span class="input-label">新的登录密码<small class="assertive" ng-show="retrieveForm.new.$dirty && retrieveForm.new.$invalid">*密码不符合规则</small></span>
           <input type="password" name="new" ng-pattern="passwordPattern" placeholder="请输入新的登录密码" ng-model="pwd.newPassword" required>
         </label>
         <label class="item item-input item-stacked-label">
-          <span class="input-label">确认新的密码：<small class="assertive" ng-show="retrieveForm.repeat.$dirty && (retrieveForm.repeat.$invalid || pwd.newPassword !== pwd.repeatPassword)">*密码不一致</small></span>
+          <span class="input-label">确认新的密码<small class="assertive" ng-show="retrieveForm.repeat.$dirty && (retrieveForm.repeat.$invalid || pwd.newPassword !== pwd.repeatPassword)">*密码不一致</small></span>
           <input type="password" name="repeat" ng-pattern="passwordPattern" placeholder="请确认登录密码" ng-model="pwd.repeatPassword" required>
         </label>
       </div>
