@@ -2,18 +2,28 @@
 	<ion-content>
 		<form name="buyForm" ng-submit="submit()">
 			<div class="content-block-inner no-margin">
-				<p class="step1">1.期限及利率</p>
-				<div class="item range range-assertive">
-					<input type="range" name="term" min="1" max="99" ng-model="order.range">
-					<div class="interest assertive"
-							 style="-webkit-transform: translate3d({{ order.left }}, 0, 0);transform: translate3d({{ order.left }}, 0, 0);min-height: 26px;">{{ order.desc }}</div>
-				</div>
-				<ul class="terms range">
-					<li ng-repeat="item in terms" ng-class="{ 'active-position assertive':item.active }">{{ item.name }}</li>
-				</ul>
+				<p class="step1">1. 期限及利率</p>
+
+				<label class="item row padding item-input item-select " ng-click="selectItem()" ng-if="isAndroidWechat">
+					<div class="col">{{order.name}}</div>
+					<div class="col assertive text-center padding-right">{{ order.desc }}</div>
+					<!-- <span class="padding-left assertive">{{order.name}} {{ order.desc }}</span> -->
+				</label>
+
+				<section ng-if="!isAndroidWechat">
+					<div class="item range range-assertive">
+						<input type="range" name="term" min="1" max="99" ng-model="order.range">
+						<div class="interest assertive"
+								 style="-webkit-transform: translate3d({{ order.left }}, 0, 0);transform: translate3d({{ order.left }}, 0, 0);min-height: 26px;">{{ order.desc }}</div>
+					</div>
+					<ul class="terms range">
+						<li ng-repeat="item in terms" ng-class="{ 'active-position assertive':item.active }">{{ item.name }}</li>
+					</ul>
+				</section>
+
 				<a class="underline add-interest text-right assertive padding" ng-if="!salaryDaySet" ui-sref="tabs.setSalaryBuy">加息2%？设置工资发放日</a>
 				<label class="item item-input step2">
-					<span class="input-label">2.金额</span>
+					<span class="input-label">2. 金额</span>
 					<input id="amount" type="text" placeholder="{{ order.minAmount }}元起投 上限&le;{{ order.maxAmount }}" ng-blur="inputBlur()" ng-model="order.amount" max="{{ order.maxAmount }}" required>
 					<span class="input-label input-add">元</span>
 				</label>

@@ -1,0 +1,12 @@
+<ion-view view-title="选择投资期限及利率">
+	<ion-content>
+		<div class="list">
+			<div class="item padding" ng-repeat="item in items" ng-click="select($index)">
+				<div class="row">
+					<div class="col-50">{{item.name}}</div>
+					<div class="col-50 text-right">{{item.desc}}</div>
+				</div>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
