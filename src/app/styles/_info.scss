@@ -9,23 +9,18 @@
     padding-bottom: 0;
     .col-80 {
       position: relative;
-      &:after {
-        $border-width: 6px;
-        content: "";
+      .triangle-svg {
+        $size: 12px;
         position: absolute;
-        border-style: dashed dashed solid dashed;
-        line-height: 1;
-        display: block;
-        border-color: red transparent transparent transparent;
-        right: -$border-width;
-        bottom: -$border-width;
-        border-width: $border-width;
-        width: 0;
-        height: 0;
-        -webkit-transform: rotate(-45deg);
-        transform: rotate(-45deg);
+        display: inline-block;
+        width: $size;
+        height: $size;
+        right: 0;
+        bottom: 0;
+        img {
+          display: block;
+        }
       }
-
     }
   }
   .col-80 {

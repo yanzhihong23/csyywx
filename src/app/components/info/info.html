@@ -20,6 +20,7 @@
 					<div class="col">定期资产<br><small class="gray">到期后转活期</small></div>
 					<div class="col col-center text-right">{{balance.regular | currency: ''}}元</div>
 				</div>
+				<i class="triangle-svg"><img ng-src="assets/images/triangle.svg" alt=""></i>
 			</div>
 			<a class="col-20 col-center text-center button-assertive button button-clear middle" ui-sref="tabs.buy">投资</a>
 		</div>
@@ -30,6 +31,7 @@
 					<div class="col">活期资产<br><small class="gray">按年化8.88%计息</small></div>
 					<div class="col col-center text-right">{{balance.demand | currency: ''}}元</div>
 				</div>
+				<i class="triangle-svg"><img ng-src="assets/images/triangle.svg" alt=""></i>
 			</div>
 			<a class="col-20 col-center text-center button-assertive button button-clear middle" ui-sref="tabs.withdraw">提现</a>
 		</div>
@@ -40,6 +42,7 @@
 					<div class="col">体验金<br><small class="gray">分享涨体验金</small></div>
 					<div class="col col-center text-right">{{balance.experience | currency: ''}}元</div>
 				</div>
+				<i class="triangle-svg"><img ng-src="assets/images/triangle.svg" alt=""></i>
 			</div>
 			<a class="col-20 col-center text-center button-assertive button button-clear middle" ng-click="viewExperience()">分享</a>
 		</div>
