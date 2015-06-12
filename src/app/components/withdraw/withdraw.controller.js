@@ -14,7 +14,7 @@ angular.module('csyywx')
 			if(+data.flag === 1) {
 				$scope.items = data.data.productEntity.map(function(obj) {
 					obj.text = obj.productName;
-					obj.availableAmount = obj.isAvailable && $scope.item.availableAmount;
+					obj.availableAmount = obj.isAvailable && obj.availableAmount;
 					return obj;
 				});
 
