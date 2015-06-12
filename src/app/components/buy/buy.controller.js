@@ -101,10 +101,11 @@ angular.module('csyywx')
 			var len = $scope.terms.length;
 			if (len === 0) return;
 			//$scope.order.range = level/(len)*100 + 100/len/2;
-			$scope.order.range = checkPosition();
+			$scope.order.range = checkPosition() ? checkPosition() : level/(len)*100 + 100/len/2;
 			if (+level <= 0) {
 				$scope.order.range = 1;
 			}
+			console.log(+level, len-1, +level>len-1)
 			if (+level >= len -1) {
 				$scope.order.range = 99;
 			}
@@ -123,8 +124,12 @@ angular.module('csyywx')
 			var activeEle = document.querySelector('.terms .active-position');
 			var padding = 11;
 			var width = window.innerWidth;
-			var hopePosition = +((activeEle.offsetLeft - padding)/(width - 2*padding-27)*100);
-			return hopePosition;
+			var hopePosition = +((activeEle.offsetLeft - padding)/(width - 2*padding-24/320*width)*100);
+			if (width>=768) {
+				return false;
+			} else {
+				return hopePosition;
+			}
 		}
 
 
