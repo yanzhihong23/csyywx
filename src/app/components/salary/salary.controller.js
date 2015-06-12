@@ -69,7 +69,7 @@ angular.module('csyywx')
 					// update setting service
 					settingService.update();
 					utils.alert({
-						content: '你的“那几天”设置成功',
+						content: '设置成功，还有 ' + $scope.remain-1 + ' 次修改机会。',
 						callback: function() {
 							utils.goBack();
 						}
