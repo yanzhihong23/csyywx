@@ -54,3 +54,14 @@ a, a:hover, a:active, a:focus{
 .bar.bar-assertive{
 	background: $assertive;
 }
+
+.back-button{
+	i{
+		transform: scale(1.5);
+		-webkit-transform: scale(1.5);
+		padding-left: 5px;
+	}
+	.back-text{
+		padding-left: 5px;
+	}
+}
