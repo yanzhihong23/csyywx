@@ -31,7 +31,7 @@ angular.module('csyywx')
 
 		$scope.$on('keyboard', function(evt, key) {
 			console.log("===%s pressed==", key);
-			if ($scope.error.show) {
+			if (key !== 'ok' && $scope.error.show) {
 				resetError();
 			}
 		});
@@ -71,7 +71,7 @@ angular.module('csyywx')
 					};
 				}
 				clearPayPasswordWidget();
-			})
+			});
 		}
 
 		function step1(password) {
