@@ -15,11 +15,13 @@
         position: absolute;
         border-style: dashed dashed solid dashed;
         line-height: 1;
-        display: inline-block;
+        display: block;
         border-color: red transparent transparent transparent;
         right: -$border-width;
         bottom: -$border-width;
         border-width: $border-width;
+        width: 0;
+        height: 0;
         -webkit-transform: rotate(-45deg);
         transform: rotate(-45deg);
       }
