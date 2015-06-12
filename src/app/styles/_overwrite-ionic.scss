@@ -6,7 +6,7 @@
 }
 
 .tabs-light > .tabs, .tabs.tabs-light{
-  border-top: solid 1px $border-color !important;
+  // border-top: solid 1px $border-color !important;
 }
 
 .tab-item{
@@ -49,4 +49,8 @@ a, a:hover, a:active, a:focus{
 
 .bar-header{
 	border-bottom-width: 0;
+}
+
+.bar.bar-assertive{
+	background: $assertive;
 }

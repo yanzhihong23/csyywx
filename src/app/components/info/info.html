@@ -6,7 +6,7 @@
 		<section class="text-center total-income" ng-click="viewBalanceDetail('accumulative')">
 			<div class="padding">累计收益(元)</div>
 			<div class="big padding">{{balance.totalIncome | currency:''}}</div>
-			<div class="padding">昨日收益+{{balance.lastIncome | currency: ''}}</div>
+			<div class="padding">昨日+{{balance.lastIncome | currency: ''}}</div>
 		</section>
 
 		<div class="each-item border row white-bg padding content-block-inner" ng-click="viewBalanceDetail('total')">

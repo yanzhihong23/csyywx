@@ -48,7 +48,7 @@ angular.module('csyywx')
 						}
 
 						return {
-							date: queryType && $filter('date')(new Date(obj.investDate), 'yyyy-MM-dd'),
+							date: $filter('date')(new Date(obj.investDate), 'yyyy-MM-dd'),
 							desc: obj.termDesc,
 							amount: obj.investAmount,
 							status: status
@@ -62,7 +62,7 @@ angular.module('csyywx')
 					if(+data.flag === 1) {
 						$scope.items = data.data.interestList.map(function(obj) {
 							return {
-								date: $filter('date')(new Date(obj.interestDate), 'yyyy-MM-dd'),
+								date: obj.interestDate,
 								amount: obj.actualInterest
 							}
 						})
