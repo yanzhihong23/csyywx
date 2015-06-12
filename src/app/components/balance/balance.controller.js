@@ -48,7 +48,7 @@ angular.module('csyywx')
 						}
 
 						return {
-							date: $filter('date')(new Date(obj.investDate), 'yyyy-MM-dd'),
+							date: queryType && $filter('date')(new Date(obj.investDate), 'yyyy-MM-dd'),
 							desc: obj.termDesc,
 							amount: obj.investAmount,
 							status: status
