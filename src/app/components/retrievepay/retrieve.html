@@ -3,9 +3,10 @@
 
     <div class="list padding-bottom padding-horizontal">
       <div class="row">
-        <div class="col">{{ step.title }}<span ng-show="error.show" class="assertive">*{{ error.content }}</span></div>
+        <div class="col">{{ step.title }}</div>
       </div>
       <pay-password></pay-password>
+      <div class="col assertive" ng-show="error.show">*{{ error.content }}</div>
     </div>
     <keyboard></keyboard>
 
