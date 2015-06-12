@@ -8,22 +8,7 @@ angular.module('csyywx')
     $scope.user = {
     	phone: $stateParams.phone,
     	invalidVcode: false,
-    	passwordMismatch: false
     };
-
-		$scope.$watch('user.passwordConfirm', function(val) {
-			var password = $scope.user.password;
-			if(val && val.length >= password.length) {
-				if(val !== password) {
-					$scope.user.passwordMismatch = true;
-					$scope.user.passwordMatch = false;
-				} else {
-					$scope.user.passwordMatch = true;
-				}
-			} else {
-				$scope.user.passwordMatch = false;
-			}
-		});
 
     $scope.sendVcode = function() {
     	$ionicLoading.show();
