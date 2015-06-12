@@ -15,8 +15,8 @@
 			    </button>
 		    </div>
 		    <label class="item item-input item-stacked-label">
-		      <span class="input-label">登录密码</span>
-		      <input type="password" placeholder="6-16位，至少包含数字、字母、符号中的2种" ng-change="passwordValidate(user.password)" ng-model="user.password" required>
+		      <span class="input-label">登录密码 <small ng-show="registerForm.password.$dirty&&registerForm.password.$invalid" class="assertive">*密码不符合规则</small></span>
+		      <input type="password" name="password" placeholder="6-16位，至少包含数字、字母、符号中的2种" ng-pattern="passwordPattern" ng-model="user.password" required>
 		    </label>
 		    <label class="item item-input item-stacked-label">
 		      <span class="input-label">确认登录密码 <small ng-show="user.passwordMismatch" class="assertive">*密码不一致</small></span>
@@ -28,7 +28,7 @@
 		    </label>
 			</div>
 			<div class="padding-horizontal">
-				<button type="submit" class="button button-full button-assertive" ng-disabled="registerForm.$invalid || user.invalidPassword || user.invalidVcode || !user.passwordMatch">注册</button>
+				<button type="submit" class="button button-full button-assertive" ng-disabled="registerForm.$invalid || user.invalidVcode || !user.passwordMatch">注册</button>
 			</div>
 		</form>
 

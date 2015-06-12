@@ -3,17 +3,13 @@
 angular.module('csyywx')
   .controller('RegisterCtrl', function($scope, $rootScope, $state, $stateParams, $ionicLoading, UserApi, userConfig, utils, balanceService, settingService) {
   	var resendCountdown = utils.resendCountdown($scope);
+    $scope.passwordPattern = utils.passwordPattern;
 
     $scope.user = {
     	phone: $stateParams.phone,
     	invalidVcode: false,
-    	invalidPassword: false,
     	passwordMismatch: false
     };
-
-    $scope.passwordValidate = function(password) {
-      $scope.user.invalidPassword = !utils.isPasswordValid(password);
-		};
 
 		$scope.$watch('user.passwordConfirm', function(val) {
 			var password = $scope.user.password;
