@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('BuyCtrl', function($scope, $state, $ionicLoading, UserApi, PayApi, userConfig, $timeout, orderService, utils, localStorageService) {
+	.controller('BuyCtrl', function($scope, $rootScope, $ionicPlatform, $state, $ionicLoading, UserApi, PayApi, userConfig, $timeout, orderService, utils, localStorageService, productService) {
 		var sessionId = userConfig.getSessionId(), productCode, level, orderId, hasPayPassword, card;
+
+		$scope.isAndroidWechat = $rootScope.wechat && $ionicPlatform.is('android');
+		// $scope.isAndroidWechat = $ionicPlatform.is('android');
 
 		var init = function() {
 			$scope.salaryDaySet = false;
@@ -37,9 +40,11 @@ angular.module('csyywx')
 									hasPayPassword = !!+data.data.userDetail.hasPayPassword;
 									card = data.data.bindCardList && data.data.bindCardList[0];
 
-									$timeout(function() {
-										rangePositionFix();
-									}, 100);
+									if(!$scope.isAndroidWechat) {
+										$timeout(function() {
+											rangePositionFix();
+										}, 100);
+									}
 
 									localStorageService.add('limit', data.data.limitExplain);
 								}
@@ -58,8 +63,29 @@ angular.module('csyywx')
 					days: +obj.countDays,
 					desc: obj.description,
 					systemMonthRateId: obj.systemMonthRateId
-				}
+				};
 			});
+
+			console.log($ionicPlatform.is('android'))
+
+			if($scope.isAndroidWechat) { // android wechat
+				productService.products = $scope.terms;
+				$scope.selected = productService.selected;
+				$scope.$watch('selected', function(val) {
+					if(val.level) {
+						level = val.level;
+						changeLevel();
+					}
+				}, true)
+			} else {
+				angular.element(document.querySelector('#BUY'))
+					.bind('touchstart', function() {
+						document.getElementById('amount').blur();
+					})
+					.bind('touchend', function() {
+						rangePositionFix();
+					});
+			}
 
 			$scope.$watch('order.range', function(val) {
 				var len = $scope.terms.length;
@@ -76,13 +102,7 @@ angular.module('csyywx')
 
 				$scope.terms[level].active = true;
 
-				var term = $scope.terms[level];
-				$scope.order.name = term.name;
-				$scope.order.annualYield = term.annualYield;
-				$scope.order.maxAmount = term.maxAmount;
-				$scope.order.days = term.days;
-				$scope.order.desc = term.desc;
-				$scope.order.systemMonthRateId = term.systemMonthRateId;
+				changeLevel()
 
 				calculate();
 			});
@@ -90,6 +110,16 @@ angular.module('csyywx')
 			$scope.$watch('order.amount', function(val) {
 				calculate();
 			});
+		};
+
+		var changeLevel = function() {
+			var term = $scope.terms[level];
+			$scope.order.name = term.name;
+			$scope.order.annualYield = term.annualYield;
+			$scope.order.maxAmount = term.maxAmount;
+			$scope.order.days = term.days;
+			$scope.order.desc = term.desc;
+			$scope.order.systemMonthRateId = term.systemMonthRateId;
 		};
 
 		var calculate = function() {
@@ -112,14 +142,6 @@ angular.module('csyywx')
 			$scope.$apply();
 		};
 
-		angular.element(document.querySelector('#BUY'))
-			.bind('touchstart', function() {
-				document.getElementById('amount').blur();
-			})
-			.bind('touchend', function() {
-				rangePositionFix();
-			});
-
 		function checkPosition() {
 			var activeEle = document.querySelector('.terms .active-position');
 			var padding = 11;
@@ -131,6 +153,10 @@ angular.module('csyywx')
 				return hopePosition;
 			}
 		}
+
+		$scope.selectItem = function() {
+			$state.go('tabs.selectItem');
+		};
 
 
 		$scope.submit = function() {
@@ -172,7 +198,21 @@ angular.module('csyywx')
 		};
 
 		$scope.$on('$ionicView.beforeEnter', function(){
-			init();
+			// init();
     });
 
-	});
+		init();
+	})
+	.controller('SelectItemCtrl', function($scope, productService, utils) {
+		$scope.items = productService.products;
+
+		$scope.select = function(index) {
+			productService.selected.level = index;
+			utils.goBack();
+		};
+	})
+	.service('productService', function() {
+		this.products = [];
+
+		this.selected = {};
+	})

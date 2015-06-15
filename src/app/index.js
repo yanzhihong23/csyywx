@@ -234,6 +234,15 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
           }
         }
       })
+      .state('tabs.selectItem', {
+        url: '/selectItem',
+        views: {
+          'buy-tab': {
+            templateUrl: 'app/components/buy/select.html',
+            controller: 'SelectItemCtrl'
+          }
+        }
+      })
     	/************************** info tab ***************************/
     	.state('tabs.balance', {
     		url: '/balance?type',
