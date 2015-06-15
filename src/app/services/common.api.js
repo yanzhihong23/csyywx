@@ -18,4 +18,13 @@ angular.module('csyywx')
 			}).success(function(data) {
 			})
 		};
+
+		this.bankBaseData = function() {
+			return $http({
+				method: 'POST',
+				url: HOST_URL + '/system/bankBaseData',
+				headers: headers,
+				data: null
+			})
+		}
 	})
