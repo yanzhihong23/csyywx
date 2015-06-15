@@ -69,7 +69,8 @@ angular.module('csyywx')
 					// update setting service
 					settingService.update();
 					utils.alert({
-						content: '设置成功，还有 ' + $scope.remain-1 + ' 次修改机会。',
+						content: '您已成功设置加薪日，共三次设置机会，还有 ' + (+$scope.remain - 1) + ' 次修改机会哦。',
+						okText: '我知道了',
 						callback: function() {
 							utils.goBack();
 						}
