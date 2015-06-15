@@ -3,7 +3,7 @@
 angular.module('csyywx')
 	.factory('utils', function($ionicHistory, $state, $timeout, $ionicPopup) {
 		return {
-			passwordPattern: /^(?!\d+$|[a-zA-Z]+$|[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]+$)[\s\S]{6,16}$/,
+			passwordPattern: /^(?!\d+$|[a-zA-Z]+$|\W_+$)[\s\S]{6,16}$/,
 			param: function(obj) {
 				var str = [];
         for(var p in obj) {
