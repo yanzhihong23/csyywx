@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('LimitCtrl', function($scope, localStorageService) {
+	.controller('LimitCtrl', function($scope, localStorageService, userConfig) {
 		$scope.limit = localStorageService.get('limit');
 
-		$scope.tab = 0;
+		$scope.tab = +userConfig.getBasicInfo().isInvest;
 	})
