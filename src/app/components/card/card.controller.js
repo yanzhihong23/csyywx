@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('CardCtrl', function($scope, $state, $ionicLoading, userConfig, PayApi, bankService, utils, orderService) {
+	.controller('CardCtrl', function($scope, $rootScope, $state, $ionicLoading, userConfig, PayApi, bankService, utils, orderService, balanceService) {
 		var resendCountdown = utils.resendCountdown($scope), params;
 		var isPay = $state.current.name === 'tabs.pay';
 
@@ -87,7 +87,12 @@ angular.module('csyywx')
 		var bindPay = function() {
 			PayApi.bindPay(params).success(function(data) {
 				$ionicLoading.hide();
-				if(+data.flag === 1) {
+				if(+data.flag === 1) { // bind and pay success
+					// update balance
+					balanceService.update();
+					// reinit order, get a new order id
+					$rootScope.$broadcast('initOrder');
+					// redirect to info page
 					$state.go('tabs.info');
 				} else {
 					utils.alert({

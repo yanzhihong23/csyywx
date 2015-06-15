@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('QuickpayCtrl', function($scope, $state, orderService, PayApi, $ionicLoading, utils, balanceService) {
+	.controller('QuickpayCtrl', function($scope, $rootScope, $state, orderService, PayApi, $ionicLoading, utils, balanceService) {
 		$scope.order = orderService.order;
 
 		$scope.$on('payPassword', function(evt, password) {
@@ -11,8 +11,10 @@ angular.module('csyywx')
 			PayApi.quickPay($scope.order).success(function(data) {
 				$ionicLoading.hide();
 				if(+data.flag === 1) {
-					// update balance service
+					// update balance
 					balanceService.update();
+					// reinit order, get a new order id
+					$rootScope.$broadcast('initOrder');
 					$state.go('tabs.info');
 				} else {
 					utils.alert({

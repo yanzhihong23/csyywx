@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('BuyCtrl', function($scope, $rootScope, $ionicPlatform, $state, $ionicLoading, UserApi, PayApi, userConfig, $timeout, orderService, utils, localStorageService, productService) {
-		var sessionId = userConfig.getSessionId(), productCode, level, orderId, hasPayPassword, card, touchRange=false;
+	.controller('BuyCtrl', function($scope, $rootScope, $ionicPlatform, $state, $ionicLoading, UserApi, PayApi, userConfig, $timeout, orderService, utils, localStorageService, settingService, productService) {
+		var sessionId = userConfig.getSessionId(), productCode, level, orderId, card, touchRange=false;
+		var setting = settingService.setting;
 
 		$scope.isAndroidWechat = $rootScope.wechat && $ionicPlatform.is('android');
 		// $scope.isAndroidWechat = $ionicPlatform.is('android');
@@ -37,7 +38,7 @@ angular.module('csyywx')
 									initRange(data.data.monthRates);
 									// save order id
 									orderId = data.data.orderid;
-									hasPayPassword = !!+data.data.userDetail.hasPayPassword;
+									// hasPayPassword = !!+data.data.userDetail.hasPayPassword;
 									card = data.data.bindCardList && data.data.bindCardList[0];
 
 									if(!$scope.isAndroidWechat) {
@@ -165,10 +166,9 @@ angular.module('csyywx')
 
 
 		$scope.submit = function() {
-			console.log('hasCard: ' + !!card);
-			console.log('hasPayPassword: ' + hasPayPassword);
-
-			console.log($scope.order);
+			// console.log('hasCard: ' + !!card);
+			// console.log('hasPayPassword: ' + hasPayPassword);
+			// console.log($scope.order);
 			orderService.order = {
 				sessionId: sessionId,
 				orderId: orderId,
@@ -178,7 +178,7 @@ angular.module('csyywx')
 			};
 
 			if(card) {
-				if(!hasPayPassword) {
+				if(!setting.payPassword) {
 					utils.confirm({
 						title: '温馨提示',
 						content: '您还未设置支付密码',
@@ -193,7 +193,6 @@ angular.module('csyywx')
 					orderService.order.storablePan = card.shortNumber;
 					orderService.order.bankName = card.bankName;
 					orderService.order.tailNo = card.bankCardNumber;
-					console.log('quick pay')
 					$state.go('tabs.quickpay');
 				}
 			} else {
@@ -204,6 +203,10 @@ angular.module('csyywx')
 
 		$scope.$on('$ionicView.beforeEnter', function(){
 			// init();
+    });
+
+    $rootScope.$on('initOrder', function() {
+    	init();
     });
 
 		init();
