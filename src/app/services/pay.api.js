@@ -80,7 +80,7 @@ angular.module('csyywx')
 					realName: obj.realname,
 					idno: obj.idNo,
 					bankCode: obj.bankCode,
-					bankCardno: obj.bankCardNo,
+					bankCardNo: obj.bankCardNo,
 					mobile: obj.phone,
 					amount: obj.amount,
 					transCode: obj.transCode || 1, // 1: bind and pay, 2: withdraw, 3: bind,

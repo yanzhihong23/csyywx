@@ -21,7 +21,7 @@
 					</ul>
 				</section>
 
-				<a class="underline add-interest text-right assertive padding" ng-if="!salaryDaySet" ui-sref="tabs.setSalaryBuy">加息2%？设置工资发放日</a>
+				<a class="underline add-interest text-right assertive padding" ui-sref="tabs.setSalaryBuy">加息2%？设置工资发放日</a>
 				<label class="item item-input step2">
 					<span class="input-label">2. 金额</span>
 					<input id="amount" type="text" placeholder="{{ order.minAmount }}元起投 上限&le;{{ order.maxAmount }}" ng-blur="inputBlur()" ng-model="order.amount" max="{{ order.maxAmount }}" required>

@@ -22,6 +22,7 @@ angular.module('csyywx')
 			if(+data.flag === 1) {
 				// save token to params
 				params.token = data.data.token;
+				params.storablePan = data.data.storablePan;
 				// enable vcode input
 				$scope.vcodeSent = true;
 				// start count count
@@ -42,6 +43,7 @@ angular.module('csyywx')
 				orderId: orderService.order.orderId,
 				amount: orderService.order.amount,
 				productCode: orderService.order.productCode,
+				systemMonthRateId: orderService.order.systemMonthRateId,
 				realname: $scope.kyc.realname,
 				idNo: $scope.kyc.idNo,
 				bankCode: $scope.card.bankCode,
@@ -68,22 +70,40 @@ angular.module('csyywx')
 			PayApi.sendBindVcode(params).success(sendVcodeHandler);
 		};
 
+		var bind = function() {
+			PayApi.bind(params).success(function(data) {
+				$ionicLoading.hide();
+				if(+data.flag === 1) {
+					utils.goBack();
+				} else {
+					utils.alert({
+						title: '绑定失败',
+						content: data.msg
+					});
+				}
+			});
+		};
+
+		var bindPay = function() {
+			PayApi.bindPay(params).success(function(data) {
+				$ionicLoading.hide();
+				if(+data.flag === 1) {
+					$state.go('tabs.info');
+				} else {
+					utils.alert({
+						title: '付款失败',
+						content: data.msg
+					});
+				}
+			});
+		};
+
 		$scope.submit = function() {
 			$ionicLoading.show();
 			// add vcode to params
 			params.vcode = $scope.card.vcode;
 
-			PayApi.bind(params).success(function(data) {
-				$ionicLoading.hide();
-				if(+data.flag === 1) {
-					isPay ? $state.go('tabs.info') : utils.goBack();
-				} else {
-					utils.alert({
-						title: isPay ? '付款失败' : '绑定失败',
-						content: data.msg
-					});
-				}
-			});
+			isPay ? bindPay() : bind();
 		};
 	})
 	.controller('SelectCardCtrl', function($scope, bankService, utils) {
