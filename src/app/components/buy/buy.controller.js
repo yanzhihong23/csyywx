@@ -2,7 +2,7 @@
 
 angular.module('csyywx')
 	.controller('BuyCtrl', function($scope, $rootScope, $ionicPlatform, $state, $ionicLoading, UserApi, PayApi, userConfig, $timeout, orderService, utils, localStorageService, productService) {
-		var sessionId = userConfig.getSessionId(), productCode, level, orderId, hasPayPassword, card;
+		var sessionId = userConfig.getSessionId(), productCode, level, orderId, hasPayPassword, card, touchRange=false;
 
 		$scope.isAndroidWechat = $rootScope.wechat && $ionicPlatform.is('android');
 		// $scope.isAndroidWechat = $ionicPlatform.is('android');
@@ -79,11 +79,16 @@ angular.module('csyywx')
 				}, true)
 			} else {
 				angular.element(document.querySelector('#BUY'))
+					.bind('touchend', function() {
+						if (touchRange) {
+							rangePositionFix();
+							touchRange = false;
+						}
+					});
+				angular.element(document.getElementById('range_item'))
 					.bind('touchstart', function() {
 						document.getElementById('amount').blur();
-					})
-					.bind('touchend', function() {
-						rangePositionFix();
+						touchRange = true;
 					});
 			}
 
