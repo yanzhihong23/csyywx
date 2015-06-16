@@ -1,23 +1,7 @@
 <ion-view view-title="限额说明">
 	<ion-content>
-
-		<div class="padding margin-horizontal">
-			<div class="button-bar padding" tab="{{tab}}">
-				<a class="button button-assertive" ng-click="tab = 0" ng-class="{ 'button-outline': tab===1 }">首次购买</a>
-				<a class="button button-assertive" ng-click="tab = 1" ng-class="{ 'button-outline': tab===0 }">再次购买</a>
-			</div>
-		</div>
-
-		<div class="list" ng-show="tab===0">
-			<div class="item white-bg padding-vertical" ng-repeat="item in limit.firstRecharge">
-				<div>{{item.bankName}}</div>
-				<small class="gray">{{item.rechargeExplain}}</small>
-			</div>
-		</div>
-
-
-		<div class="list" ng-show="tab===1">
-			<div class="item white-bg padding-vertical" ng-repeat="item in limit.quickRecharge">
+		<div class="list">
+			<div class="item white-bg padding-vertical" ng-repeat="item in limit">
 				<div>{{item.bankName}}</div>
 				<small class="gray">{{item.rechargeExplain}}</small>
 			</div>

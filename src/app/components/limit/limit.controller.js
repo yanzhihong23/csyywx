@@ -2,7 +2,7 @@
 
 angular.module('csyywx')
 	.controller('LimitCtrl', function($scope, localStorageService, userConfig) {
-		$scope.limit = localStorageService.get('limit');
+		var limit = localStorageService.get('limit');
 
-		$scope.tab = +userConfig.getBasicInfo().isInvest;
+		$scope.limit = +userConfig.getBasicInfo().isInvest ? limit.firstRecharge : limit.quickRecharge;
 	})
