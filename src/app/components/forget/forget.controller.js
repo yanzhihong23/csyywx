@@ -38,17 +38,18 @@ angular.module('csyywx')
         $ionicLoading.hide();
         console.log(data);
         if (+data.flag === 1) {
+          userConfig.setSessionId(data.data.sessionId);
           if ($scope.pay) {
             $state.go('tabs.retrievePayPassword');
           } else {
-            console.log($scope.user.phone)
-            userConfig.setSessionId(data.data.sessionId);
             $state.go('tabs.retrievePassword', {
               phone: $scope.user.phone
             });
           }
         } else {
-          alert(data.msg)
+          utils.alert({
+            content: data.msg
+          })
         }
       });
     };
