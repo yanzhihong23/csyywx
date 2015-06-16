@@ -90,10 +90,8 @@ angular.module('csyywx')
 				if(+data.flag === 1) { // bind and pay success
 					// update balance
 					balanceService.update();
-					// reinit order, get a new order id
-					$rootScope.$broadcast('initOrder');
 					// redirect to info page
-					$state.go('tabs.info');
+					utils.goInfo();
 				} else {
 					utils.alert({
 						title: '付款失败',

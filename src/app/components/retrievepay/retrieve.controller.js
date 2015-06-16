@@ -55,7 +55,9 @@ angular.module('csyywx')
           if (+data.flag === 1) {
             utils.alert({
               content: '修改成功',
-              callback: utils.goBack
+              callback: function() {
+                utils.goBack(-2);
+              }
             });
           } else {
             utils.alert({

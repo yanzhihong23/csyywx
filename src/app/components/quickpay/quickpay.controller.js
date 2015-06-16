@@ -13,9 +13,7 @@ angular.module('csyywx')
 				if(+data.flag === 1) {
 					// update balance
 					balanceService.update();
-					// reinit order, get a new order id
-					$rootScope.$broadcast('initOrder');
-					$state.go('tabs.info');
+					utils.goInfo();
 				} else {
 					utils.alert({
 						title: '付款失败',

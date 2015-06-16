@@ -166,9 +166,6 @@ angular.module('csyywx')
 
 
 		$scope.submit = function() {
-			// console.log('hasCard: ' + !!card);
-			// console.log('hasPayPassword: ' + hasPayPassword);
-			// console.log($scope.order);
 			orderService.order = {
 				sessionId: sessionId,
 				orderId: orderId,
@@ -203,10 +200,6 @@ angular.module('csyywx')
 
 		$scope.$on('$ionicView.beforeEnter', function(){
 			// init();
-    });
-
-    $rootScope.$on('initOrder', function() {
-    	init();
     });
 
 		init();

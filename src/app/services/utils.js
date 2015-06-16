@@ -43,17 +43,22 @@ angular.module('csyywx')
 				$ionicHistory.clearHistory();
 				$ionicHistory.clearCache();
 			},
+			goInfo: function() {
+				$state.go('tabs.info');
+				$ionicHistory.clearHistory();
+				$ionicHistory.clearCache();
+			},
 			goBack: function(depth) {
-				if(depth) {
-					// get the right history stack based on the current view
-					var historyId = $ionicHistory.currentHistoryId();
-					var history = $ionicHistory.viewHistory().histories[historyId];
-					// set the view 'depth' back in the stack as the back view
-					var targetViewIndex = history.stack.length - 1 - depth;
-					$ionicHistory.backView(history.stack[targetViewIndex]);
-				}
+				// if(depth) {
+				// 	// get the right history stack based on the current view
+				// 	var historyId = $ionicHistory.currentHistoryId();
+				// 	var history = $ionicHistory.viewHistory().histories[historyId];
+				// 	// set the view 'depth' back in the stack as the back view
+				// 	var targetViewIndex = history.stack.length - 1 - depth;
+				// 	$ionicHistory.backView(history.stack[targetViewIndex]);
+				// }
 				// navigate to it
-				$ionicHistory.goBack();
+				$ionicHistory.goBack(depth);
 			},
 			isPasswordValid: function(password) {
 				var minMaxLength = /^[\s\S]{6,16}$/,
