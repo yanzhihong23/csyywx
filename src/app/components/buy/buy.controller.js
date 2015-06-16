@@ -35,11 +35,12 @@ angular.module('csyywx')
 								if (+data.flag === 1) {
 									$scope.salaryDaySet = !!data.data.isSetSalaryDay;
 									$scope.inSalaryDays = !!data.data.isBetweenSalaryDate;
-									initRange(data.data.monthRates);
 									// save order id
 									orderId = data.data.orderid;
 									// hasPayPassword = !!+data.data.userDetail.hasPayPassword;
 									card = data.data.bindCardList && data.data.bindCardList[0];
+
+									initRange(data.data.monthRates);
 
 									if(!$scope.isAndroidWechat) {
 										$timeout(function() {
@@ -60,7 +61,7 @@ angular.module('csyywx')
 				return {
 					name: obj.monthName,
 					annualYield: (obj.productRate*100 + obj.monthRate*100 + ($scope.inSalaryDays ? obj.increaseRate*100 : 0))/100,
-					maxAmount: +obj.investAmountMax,
+					maxAmount: (card && card.rechargeLimit > 0) ? Math.min(card.rechargeLimit, +obj.investAmountMax) : +obj.investAmountMax ,
 					days: +obj.countDays,
 					desc: obj.description,
 					systemMonthRateId: obj.systemMonthRateId
