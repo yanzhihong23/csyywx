@@ -32,10 +32,11 @@ angular.module('csyywx')
 			}).success(function(data) {
 				if(+data.flag === 1) {
 					$scope.items = data.data.assetList.map(function(obj) {
-						var status;
+						var status, style;
 						switch(+obj.status) {
 							case 1:
 								status = '转活期';
+								style = 'line-through';
 								break;
 							case 2:
 								status = '提现';
@@ -55,7 +56,8 @@ angular.module('csyywx')
 							date: $filter('date')(new Date(obj.investDate), 'yyyy-MM-dd'),
 							desc: obj.termDesc,
 							amount: obj.investAmount,
-							status: status
+							status: status,
+							style: style
 						};
 					});
 				}

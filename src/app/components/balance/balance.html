@@ -12,7 +12,7 @@
 					{{item.date}}
 				</div>
 				<div class="col text-right">
-					<span class="assertive">{{item.amount}}</span> <br ng-if="item.status">
+					<span class="assertive" ng-class="item.style">{{item.amount}}</span> <br ng-if="item.status">
 					{{item.status}}
 				</div>
 			</div>
