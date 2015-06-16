@@ -74,6 +74,8 @@ angular.module('csyywx')
 			PayApi.bind(params).success(function(data) {
 				$ionicLoading.hide();
 				if(+data.flag === 1) {
+					// update setting service
+					settingService.update();
 					utils.goBack();
 				} else {
 					utils.alert({
@@ -90,6 +92,8 @@ angular.module('csyywx')
 				if(+data.flag === 1) { // bind and pay success
 					// update balance
 					balanceService.update();
+					// update setting service
+					settingService.update();
 					// redirect to info page
 					utils.goInfo();
 				} else {

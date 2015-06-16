@@ -147,6 +147,7 @@ angular.module('csyywx')
 				console.log(data);
 				if (+data.flag === 1) {
 					$scope.step = step[0];
+					// update setting service
 					settingService.update();
 					utils.alert({
 						content: '支付密码设置成功',
