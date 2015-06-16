@@ -47,6 +47,10 @@ angular.module('csyywx')
 								status = '买入';
 						}
 
+						if(+queryType === 3) {
+							status = '成功';
+						}
+
 						return {
 							date: $filter('date')(new Date(obj.investDate), 'yyyy-MM-dd'),
 							desc: obj.termDesc,
