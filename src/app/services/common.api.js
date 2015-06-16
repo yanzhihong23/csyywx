@@ -26,5 +26,5 @@ angular.module('csyywx')
 				headers: headers,
 				data: null
 			})
-		}
+		};
 	})

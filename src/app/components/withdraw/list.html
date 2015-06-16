@@ -1,0 +1,9 @@
+<ion-view view-title="{{title}}">
+	<ion-content>
+		<div class="list">
+			<div class="item white-bg padding-vertical" ng-repeat="item in items" ng-click="select($index)">
+				<div>{{item.name}}</div>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('WithdrawCtrl', function($scope, $ionicActionSheet, $ionicLoading, userConfig, PayApi, utils, balanceService) {
+	.controller('WithdrawCtrl', function($scope, $state, $ionicActionSheet, $ionicLoading, userConfig, PayApi, utils, withdrawService) {
 		var	sessionId = userConfig.getSessionId(), orderId, card;
 
 		$scope.withdraw = {
@@ -63,8 +63,7 @@ angular.module('csyywx')
 		};
 
 		$scope.submit = function() {
-			$ionicLoading.show();
-			var params = {
+			var order = {
 				sessionId: sessionId,
 				orderId: orderId,
 				productCode: $scope.item.productCode,
@@ -73,20 +72,40 @@ angular.module('csyywx')
 				amount: $scope.withdraw.amount,
 				userCardCode: card.userCardCode,
 				storablePan: card.shortNumber,
-				provinceId: card.provinceId,
-				cityId: card.cityId,
-				bankBranchId: card.bankBranchId
+				card: card
 			};
+			console.log(card);
 
-			PayApi.withdraw(params).success(function(data) {
+			withdrawService.order = order;
+
+			$state.go('tabs.district');
+		};
+
+	})
+	.controller('DistrictCtrl', function($scope, $state, PayApi, withdrawService, balanceService, $ionicLoading, utils) {
+		var order = withdrawService.order;
+		$scope.selected = withdrawService.selected;
+		$scope.card = withdrawService.order.card;
+
+		$scope.select = function(type) {
+			$state.go('tabs.selectDistrict', {type: type});
+		};
+
+		$scope.submit = function() {
+			$ionicLoading.show();
+			order.provinceId = $scope.selected.province.provinceId;
+			order.cityId = $scope.selected.city.cityId;
+			order.card = null;
+
+			PayApi.withdraw(order).success(function(data) {
 				$ionicLoading.hide();
 				if(+data.flag === 1) {
 					// update balance service
 					balanceService.update();
 					utils.alert({
-						content: '提现申请已提交',
+						content: '您的提现申请已提交，1-2个工作日内将到账，请及时查看您的银行卡信息~',
 						callback: function() {
-							utils.goBack();
+							utils.goBack(-2);
 						}
 					});
 				} else {
@@ -94,7 +113,41 @@ angular.module('csyywx')
 						content: data.msg
 					});
 				}
-			})
-		};
+			});
 
+		};
+	})
+	.controller('SelectDistrictCtrl', function($scope, $stateParams, withdrawService, utils) {
+		var isProvince = $stateParams.type === 'province';
+
+		if(isProvince) {
+			$scope.title = '选择省份';
+			$scope.items = withdrawService.province.map(function(obj) {
+				obj.name = obj.provinceName;
+				return obj;
+			});
+		} else {
+			$scope.title = '选择城市';
+			$scope.items = withdrawService.city.filter(function(obj) {
+				return withdrawService.selected.province ? obj.provinceId === withdrawService.selected.province.provinceId : true;
+			}).map(function(obj) {
+				obj.name = obj.cityName;
+				return obj;
+			});
+		}
+
+		$scope.select = function(index) {
+			if(isProvince) {
+				withdrawService.selectProvince($scope.items[index]);
+				var cityList = withdrawService.city.filter(function(obj) {
+					return obj.provinceId === $scope.items[index].provinceId;
+				});
+
+				withdrawService.selectCity(cityList[0]);
+			} else {
+				withdrawService.selectCity($scope.items[index]);
+			}
+
+			utils.goBack();
+		};
 	})

@@ -343,6 +343,24 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
           }
         }
       })
+      .state('tabs.district', {
+        url: '/district',
+        views: {
+          'info-tab': {
+            templateUrl: 'app/components/withdraw/district.html',
+            controller: 'DistrictCtrl'
+          }
+        }
+      })
+      .state('tabs.selectDistrict', {
+        url: '/selectDistrict?type',
+        views: {
+          'info-tab': {
+            templateUrl: 'app/components/withdraw/list.html',
+            controller: 'SelectDistrictCtrl'
+          }
+        }
+      })
 
 			;
     $urlRouterProvider.otherwise('/tab/home');

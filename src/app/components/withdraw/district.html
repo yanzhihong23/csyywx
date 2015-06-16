@@ -1,0 +1,25 @@
+<ion-view view-title="开户行">
+	<ion-content class="padding-top">
+		<ul class="list padding-top">
+			<li class="item item-input">
+				<span class="input-label">{{card.bankName + '(尾号' + card.bankCardNumber + ')'}}</span>
+			</li>
+		</ul>
+		<ul class="list">
+			<li class="item item-input item-select" ng-click="select('province')">
+				<span class="input-label">开户行所在省份</span>
+				<span class="assertive">{{selected.province.provinceName}}</span>
+			</li>
+			<li class="item item-input item-select" ng-click="select('city')">
+				<span class="input-label">开户行所在城市</span>
+				<span class="assertive">{{selected.city.cityName}}</span>
+			</li>
+
+			<div class="padding gray">*可点击拨打<a class="assertive" href="tel:95588">95588</a>查询银行卡信息</div>
+		</ul>
+
+		<div class="padding">
+			<button class="button button-full button-assertive" ng-click="submit()" ng-disabled="!selected.province || !selected.city">提现</button>
+		</div>
+	</ion-content>
+</ion-view>
