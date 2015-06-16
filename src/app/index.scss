@@ -31,3 +31,16 @@ a.underline {
 .border {
    border: 1px solid $border-color;
 }
+
+.relative .triangle-svg{
+  $size: 12px;
+  position: absolute;
+  display: inline-block;
+  width: $size;
+  height: $size;
+  right: 0;
+  bottom: 0;
+  img {
+    display: block;
+  }
+}

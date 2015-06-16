@@ -7,21 +7,6 @@
 #INFO .each-item {
   & + .each-item {
     padding-bottom: 0;
-    .col-80 {
-      position: relative;
-      .triangle-svg {
-        $size: 12px;
-        position: absolute;
-        display: inline-block;
-        width: $size;
-        height: $size;
-        right: 0;
-        bottom: 0;
-        img {
-          display: block;
-        }
-      }
-    }
   }
   .col-80 {
     border-right: 1px solid $border-color;

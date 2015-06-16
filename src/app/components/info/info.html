@@ -15,34 +15,31 @@
 		</div>
 	
 		<div class="each-item border row row-center white-bg content-block-inner">
-			<div class="col-80">
+			<div class="col-80" triangle>
 				<div class="row row-center" ng-click="viewBalanceDetail('regular')">
 					<div class="col">定期资产<br><small class="gray">到期后转活期</small></div>
 					<div class="col col-center text-right">{{balance.regular | currency: ''}}元</div>
 				</div>
-				<i class="triangle-svg"><img ng-src="assets/images/triangle.svg" alt=""></i>
 			</div>
 			<div class="col-20 col-center text-center middle"><a class="assertive" ui-sref="tabs.buy">投资</a></div>
 		</div>
 
 		<div class="each-item border row row-center white-bg content-block-inner">
-			<div class="col-80">
+			<div class="col-80" triangle>
 				<div class="row row-center" ng-click="viewBalanceDetail('demand')">
 					<div class="col">活期资产<br><small class="gray">按年化8.88%计息</small></div>
 					<div class="col col-center text-right">{{balance.demand | currency: ''}}元</div>
 				</div>
-				<i class="triangle-svg"><img ng-src="assets/images/triangle.svg" alt=""></i>
 			</div>
 			<div class="col-20 col-center text-center middle"><a class="assertive" ui-sref="tabs.withdraw">提现</a></div>
 		</div>
 
 		<div class="each-item border row row-center white-bg content-block-inner">
-			<div class="col-80">
+			<div class="col-80" triangle>
 				<div class="row row-center" ng-click="viewExperience()">
 					<div class="col">体验金<br><small class="gray">分享涨体验金</small></div>
 					<div class="col col-center text-right">{{balance.experience | currency: ''}}元</div>
 				</div>
-				<i class="triangle-svg"><img ng-src="assets/images/triangle.svg" alt=""></i>
 			</div>
 			<div class="col-20 col-center text-center assertive middle" ng-click="viewExperience()">分享</div>
 		</div>

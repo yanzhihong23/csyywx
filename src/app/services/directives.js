@@ -109,3 +109,11 @@ angular.module('csyywx')
 			}
 		}
 	})
+	.directive('triangle', function() {
+		return {
+			restrict: 'A',
+			link: function(scope, element, attr) {
+				angular.element(element).addClass('relative').append('<i class="triangle-svg"><img src="assets/images/triangle.svg"></i>');
+			}
+		}
+	})
