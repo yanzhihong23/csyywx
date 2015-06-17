@@ -5,6 +5,11 @@ angular.module('csyywx')
 		$scope.userData = settingService.setting;
 
 		$scope.logout = function() {
-			userConfig.logout();
+			utils.confirm({
+				content: '确认退出登录',
+				onOk: function() {
+					userConfig.logout();
+				}
+			})
 		};
 	})

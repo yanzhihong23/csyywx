@@ -67,9 +67,15 @@ angular.module('csyywx')
 			}).success(function(data) {
 				if(+data.flag === 1) {
 					// update setting service
+					var content;
+					if(+$scope.remain === 1) {
+						content = '您已成功修改加薪日，已用三次设置机会，不能再修改了哦~';
+					} else {
+						content = '您已成功设置加薪日，共三次设置机会，还有 ' + (+$scope.remain - 1) + ' 次修改机会哦。';
+					}
 					settingService.update();
 					utils.alert({
-						content: '您已成功设置加薪日，共三次设置机会，还有 ' + (+$scope.remain - 1) + ' 次修改机会哦。',
+						content: content,
 						okText: '我知道了',
 						callback: function() {
 							utils.goBack();
