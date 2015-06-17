@@ -75,14 +75,21 @@ module.exports = function(options) {
   gulp.task('other', function () {
     return gulp.src([
       options.src + '/**/*',
-      '!' + options.src + '/**/*.{html,css,js,scss}'
+      '!' + options.src + '/app/**/*.{html,js,css,scss}'
     ])
       .pipe(gulp.dest(options.dist + '/'));
   });
+
+  gulp.task('delApp', function () {
+    console.log('****************************** del app folder ***************************');
+    $.del([options.dist + '/app/']);
+  })
 
   gulp.task('clean', function (done) {
     $.del([options.dist + '/', options.tmp + '/'], done);
   });
 
-  gulp.task('build', ['html', 'fonts', 'other']);
+  gulp.task('build', ['html', 'fonts', 'other'], function() {
+    gulp.start('delApp');
+  });
 };
