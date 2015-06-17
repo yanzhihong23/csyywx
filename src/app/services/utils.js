@@ -92,7 +92,7 @@ angular.module('csyywx')
 				var alertPopup = $ionicPopup.alert({
 				  title: obj.title || '温馨提示',
 				  template: obj.content || '',
-				  cssClass: 'text-center',
+				  cssClass: obj.cssClass || 'text-center',
 				  okText: obj.okText || '确认',
 				  okType: 'button-assertive'
 				});
@@ -104,7 +104,7 @@ angular.module('csyywx')
 				var confirmPopup = $ionicPopup.confirm({
 				  title: obj.title || '温馨提示',
 				  template: obj.content || '',
-				  cssClass: 'text-center',
+				  cssClass: obj.cssClass || 'text-center',
 				  okText: obj.okText || '确认',
 				  okType: 'button-assertive',
 				  cancelText: obj.cancelText || '取消'
