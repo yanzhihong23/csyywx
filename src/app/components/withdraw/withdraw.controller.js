@@ -58,7 +58,8 @@ angular.module('csyywx')
 
 		$scope.showTip = function() {
 			utils.alert({
-				content: $scope.item.description
+				content: $scope.item.description,
+				cssClass: 'popup-large'
 			});
 		};
 
