@@ -91,8 +91,10 @@ angular.module('csyywx')
 			alert: function(obj) {
 				var alertPopup = $ionicPopup.alert({
 				  title: obj.title || '温馨提示',
-				  template: obj.content || '',
 				  cssClass: obj.cssClass || 'text-center',
+				  subTitle: obj.subTitle || '',
+				  template: obj.content || '',
+				  templateUrl: obj.contentUrl || '',
 				  okText: obj.okText || '确认',
 				  okType: 'button-assertive'
 				});

@@ -1,0 +1,20 @@
+<div ng-click="showTip=!showTip">
+	<small class="gray">本次实际购买金额: {{success.transAmount | currency:''}}元(其中{{success.remandAmount | currency:''}}元由您在财神爷爷的已到期可使用金额自动转入)</small>
+	<span class="assertive">?</span>
+	<div ng-show="showTip">
+		<small class="assertive">为使您的已到期可使用金额享受更多的收益，财神爷爷在进行新的投资时将其自动并入实际购买金额，如有疑问请联系: 4000646668</small>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col text-right">预期年化收益率: </div>
+	<div class="col">{{success.totalRate}}</div>
+</div>
+<div class="row">
+	<div class="col text-right">预计投资期限: </div>
+	<div class="col">{{success.financeMonth}}</div>
+</div>
+<div class="row">
+	<div class="col text-right">计息日: </div>
+	<div class="col">{{success.interestBeginDate | date: 'yyyy-MM-dd'}}</div>
+</div>

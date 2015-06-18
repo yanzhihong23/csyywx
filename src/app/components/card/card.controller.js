@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('csyywx')
-	.controller('CardCtrl', function($scope, $rootScope, $state, $ionicLoading, userConfig, PayApi, bankService, utils, orderService, balanceService) {
+	.controller('CardCtrl', function($scope, $rootScope, $state, $ionicLoading, $filter, userConfig, PayApi, bankService, utils, orderService, balanceService) {
 		var resendCountdown = utils.resendCountdown($scope), params;
 		var isPay = $state.current.name === 'tabs.pay';
 
@@ -94,8 +94,19 @@ angular.module('csyywx')
 					balanceService.update();
 					// update setting service
 					settingService.update();
-					// redirect to info page
-					utils.goInfo();
+
+					$rootScope.success = data.data;
+					$rootScope.success.remandAmount = +data.data.transAmount - +$scope.order.amount;
+
+					utils.alert({
+					  title: '您已成功付款 ' + $filter('currency')(params.amount, '') + ' 元',
+					  cssClass: 'popup-large',
+					  contentUrl: 'app/templates/success.html',
+					  callback: function() {
+					  	// redirect to info page
+					  	utils.goInfo();
+					  }
+					});
 				} else {
 					utils.alert({
 						title: '付款失败',
