@@ -1,9 +1,25 @@
 #BALANCE {
-  .each-item + .each-item {
-    border-top: 1px solid $border-color;
-    padding: 10px;
-  }
   .balance-head {
+  	position: fixed;
+  	top: 44px;
+  	width: 100%;
     line-height: 1;
+    .platform-cordova & {
+    	top: 64px;
+    }
+  }
+  .scroll-content{
+  	top: 142px;
+  	.platform-cordova & {
+    	top: 162px;
+    }
+  	.scroll{
+  		height: 100%;
+  	}
+  }
+  .empty-hint{
+    height: 100%;
+    background: url(../assets/images/nodata.png) no-repeat center;
+    background-size: 50%;
   }
 }

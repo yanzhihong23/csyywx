@@ -1,10 +1,9 @@
 <ion-view view-title="{{title}}" id="BALANCE">
+	<div class="text-center assertive-bg margin-top-0 padding white padding-bottom balance-head">
+		<div class="margin">{{title}}(元)</div>
+		<div class="big margin">{{balance || 0 | currency:''}}</div>
+	</div>
 	<ion-content>
-		<div class="text-center assertive-bg margin-top-0 padding white padding-bottom balance-head">
-			<div class="margin">{{title}}(元)</div>
-			<div class="big margin">{{balance || 0 | currency:''}}</div>
-		</div>
-
 		<div class="padding-top">
 			<div class="row list white-bg padding-horizontal" ng-repeat="item in items">
 				<div class="col">
@@ -17,5 +16,6 @@
 				</div>
 			</div>
 		</div>
+		<div class="empty-hint" ng-if="!items.length"></div>
 	</ion-content>
 </ion-view>
