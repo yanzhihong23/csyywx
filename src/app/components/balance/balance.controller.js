@@ -43,12 +43,13 @@ angular.module('csyywx')
 								break;
 							case 3:
 								status = '转定期';
+								style = 'line-through';
 								break;
 							default:
 								status = '买入';
 						}
 
-						if(+queryType === 3) {
+						if(+queryType === 3 && +obj.status !== 3) {
 							status = '成功';
 						}
 
