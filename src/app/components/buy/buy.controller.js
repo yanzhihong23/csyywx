@@ -15,7 +15,7 @@ angular.module('csyywx')
 			$scope.order = {
 				minAmount: 1,
 				amount: null,
-				range: 45.82,
+				range: 80,
 				reward: 0
 			};
 			// get data
@@ -41,6 +41,8 @@ angular.module('csyywx')
 									card = data.data.bindCardList && data.data.bindCardList[0];
 
 									initRange(data.data.monthRates);
+									// va len = data.data.monthRates.length;
+									// len/100*
 
 									if(!$scope.isAndroidWechat) {
 										$timeout(function() {
@@ -74,7 +76,7 @@ angular.module('csyywx')
 				productService.products = $scope.terms;
 				$scope.selected = productService.selected;
 				$scope.$watch('selected', function(val) {
-					if(val.level) {
+					if(angular.isDefined(val.level)) {
 						level = val.level;
 						changeLevel();
 					}
