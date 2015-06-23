@@ -10,7 +10,7 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 	.constant('$ionicLoadingConfig', {
     template: '<ion-spinner icon="bubbles" class="spinner-assertive"></ion-spinner>'
   })
-	.run(function($state, $rootScope, $window, userConfig, utils) {
+	.run(function($state, $rootScope, $window, userConfig, utils, WechatService) {
 		var userAgent = $window.navigator.userAgent.toLowerCase();
 		if(/micromessenger/.test(userAgent)) {
 			$rootScope.wechat = true;
@@ -95,7 +95,7 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
     	})
     	/************************** home tab ***************************/
     	.state('tabs.phone', {
-    		url: "/phone",
+    		url: "/phone?inviteCode",
 	      views: {
 	        'home-tab': {
 	          templateUrl: "app/components/phone/phone.html",
@@ -104,7 +104,7 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 	      }
     	})
     	.state('tabs.register', {
-    		url: "/register?phone",
+    		url: "/register?phone&inviteCode",
 	      views: {
 	        'home-tab': {
 	          templateUrl: "app/components/register/register.html",
@@ -255,6 +255,23 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
     			}
     		}
     	})
+      .state('tabs.experience', {
+        url: '/experience',
+        views: {
+          'info-tab': {
+            templateUrl: 'app/components/experience/experience.html',
+            controller: 'ExperienceCtrl'
+          }
+        }
+      })
+      .state('tabs.rule', {
+        url: '/rule',
+        views: {
+          'info-tab': {
+            templateUrl: 'app/components/experience/rule.html'
+          }
+        }
+      })
     	.state('tabs.setting', {
     		url: '/setting',
     		views: {

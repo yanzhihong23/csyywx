@@ -1,0 +1,47 @@
+<ion-view view-title="体验金" id="EXPERIENCE">
+	<div class="text-center assertive-bg margin-top-0 padding white padding-bottom balance-head">
+		<div class="margin">体验金(元)</div>
+		<div class="big margin">{{balance.totalAmount || 0 | currency:''}}</div>
+		<div class="padding"><small>(预期年化收益率: 8.88%)</small></div>
+	</div>
+	<ion-content>
+		<div class="row text-center balance-sub white-bg">
+			<div class="col col-center">
+				<div class="gray"><small>昨日收益(元)</small></div>
+				<div class="middle padding-top">{{balance.lastDayIncome | currency: ''}}</div>
+			</div>
+			<div class="col col-center" ng-if="!balance.lastDayIncome">
+				<div class="gray"><small>预期总收益(元)</small></div>
+				<div class="middle padding-top">{{balance.expectIncome | currency: ''}}</div>
+			</div>
+			<div class="col col-center" ng-if="balance.lastDayIncome">
+				<div class="gray"><small>累计收益(元)</small></div>
+				<div class="middle padding-top">{{balance.totalRewardIncome | currency: ''}}</div>
+			</div>
+		</div>
+
+		<div class="invite white-bg">
+			<button class="button button-assertive button-full" ng-click="experienceAlert()">邀请好友涨2000元体验金</button>
+		</div>
+		
+		<section class="padding">
+			<div class="row">
+				<div class="col">体验金详情</div>
+				<div class="col text-right"><a ui-sref="tabs.rule" class="assertive">活动规则</a></div>
+			</div>
+			<div class="balance-detail text-center">
+				<div class="row">
+					<div class="col">日期</div>
+					<div class="col">手机号</div>
+					<div class="col">体验金</div>
+				</div>
+				<div class="row" ng-repeat="item in detailList">
+					<div class="col">{{item.createDate | date: 'yyyy-MM-dd'}}</div>
+					<div class="col">{{item.mobile}}</div>
+					<div class="col">{{item.amount | currency: '￥'}}</div>
+				</div>
+			</div>
+		</section>
+		
+	</ion-content>
+</ion-view>

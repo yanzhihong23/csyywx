@@ -7,7 +7,8 @@ angular.module('csyywx')
 
     $scope.user = {
     	phone: $stateParams.phone,
-    	invalidVcode: false,
+      inviteCode: $stateParams.inviteCode,
+      invalidVcode: false
     };
 
     $scope.sendVcode = function() {
@@ -36,10 +37,17 @@ angular.module('csyywx')
     			});
 
     			$rootScope.$broadcast('loginSuc');
+          if($stateParams.inviteCode) {
+            utils.goInfo();
+          }
           
     		} else if(+data.flag === 3) { // invalid vcode
     			$scope.user.invalidVcode = true;
-    		}
+    		} else {
+          utils.alert({
+            content: data.msg
+          });
+        }
     	});
 
     };

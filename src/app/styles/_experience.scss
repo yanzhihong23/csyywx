@@ -1,0 +1,46 @@
+@import "variables";
+
+#EXPERIENCE {
+  .balance-head {
+  	position: fixed;
+  	top: 44px;
+  	width: 100%;
+    line-height: 1;
+    .platform-cordova & {
+    	top: 64px;
+    }
+  }
+  .balance-sub{
+    border-bottom: solid 1px $border-color;
+    .col{
+      padding: 20px 0;
+      &:first-child{
+        border-right: solid 1px $border-color;
+      }
+    }
+  }
+  .scroll-content{
+  	top: 176px;
+  	.platform-cordova & {
+    	top: 196px;
+    }
+  	.scroll{
+  		height: 100%;
+  	}
+  }
+  .invite{
+    padding: 20px;
+  }
+  .balance-detail{
+    border: solid 1px $border-color;
+    border-radius: 10px;
+    font-size: .9em;
+    .row{
+      margin: 0;
+      padding: 0;
+      &:not(:last-child){
+        border-bottom: solid 1px $border-color;
+      }
+    }
+  }
+}
