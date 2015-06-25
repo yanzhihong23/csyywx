@@ -7,7 +7,7 @@ angular.module('csyywx')
 		var initWxJsApi = function() {
 			$http({
 				method: 'POST',
-				url: HOST + '/msapi/activity/getSignPackage?type=csyy&url=' + location.href.split('#')[0]
+				url: HOST + '/msapi/activity/getSignPackage?type=csyy&url=' + encodeURIComponent(location.href.split('#')[0])
 				// data: utils.param({
 				// 	// url: location.href,
 				// 	type: 'csyy'
@@ -62,11 +62,11 @@ angular.module('csyywx')
 
 			wx.ready(function() {
 				var info = userConfig.getBasicInfo();
-				resetShareContent(info.mobileNumber, info.ownerActivityId);
+				resetShareContent(info&&info.mobileNumber || '***', info&&info.ownerActivityId);
 			});
 
-			wx.error(function() {
-				// alert('wx config error');
+			wx.error(function(res) {
+				alert(JSON.stringify(res));
 			});
 		}
 

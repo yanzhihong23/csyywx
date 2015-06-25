@@ -31,4 +31,17 @@ angular.module('csyywx')
 				// rewardDetailList
 			});
 		};
+
+		this.getInviteCode = function(obj) {
+			return $http({
+				method: 'POST',
+				url: HOST_URL + '/activity/inviteCode',
+				headers: headers,
+				data: utils.param({
+					sessionId: obj.sessionId
+				})
+			}).success(function(data) {
+				// inviteCode
+			});
+		}
 	})

@@ -95,7 +95,7 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
     	})
     	/************************** home tab ***************************/
     	.state('tabs.phone', {
-    		url: "/phone?inviteCode",
+    		url: "/phone?inviteCode&userfrom",
 	      views: {
 	        'home-tab': {
 	          templateUrl: "app/components/phone/phone.html",
@@ -121,7 +121,7 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
 				}
 			})
     	.state('tabs.login', {
-    		url: "/login?phone",
+    		url: "/login?phone&redirect",
 	      views: {
 	        'home-tab': {
 	          templateUrl: "app/components/login/login.html",
@@ -256,7 +256,7 @@ angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui
     		}
     	})
       .state('tabs.experience', {
-        url: '/experience',
+        url: '/experience?sessionId',
         views: {
           'info-tab': {
             templateUrl: 'app/components/experience/experience.html',

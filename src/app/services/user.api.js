@@ -54,6 +54,25 @@ angular.module('csyywx')
 			})
 		};
 
+		this.registerByActivity = function(obj) {
+			return $http({
+				method: 'POST',
+				url: HOST_URL + '/register/registerByActivity',
+				headers: headers,
+				data: utils.param({
+					sessionId: obj.sessionId,
+					mobileNumber: obj.phone,
+					checkCode: obj.vcode,
+					password: md5.createHash(obj.password || ''),
+					userType: obj.userType || 'wx+1+1', // 'tiyanjin+wx+1'
+					fromActivityId: obj.inviteCode || '',
+					registerApproach: obj.registerApproach || '03' // 01 need openId
+				})
+			}).success(function(data) {
+				// data.data.sessionId
+			})
+		};
+
 		this.login = function(obj) {
 			return $http({
 				method: 'POST',

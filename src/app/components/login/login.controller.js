@@ -20,6 +20,10 @@ angular.module('csyywx')
     			});
 
     			$rootScope.$broadcast('loginSuc');
+          if($stateParams.redirect) {
+            utils.disableBack();
+            $state.go('tabs.info');
+          }
     		} else {
 					utils.alert({
 						content: data.msg

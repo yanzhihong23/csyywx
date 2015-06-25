@@ -4,7 +4,7 @@ angular.module('csyywx')
   .controller('PhoneCtrl', function($scope, $state, $stateParams, $ionicLoading, UserApi) {
     $scope.clicked = false;
     $scope.user = {};
-    if($stateParams.inviteCode) {
+    if($stateParams.inviteCode || $stateParams.userfrom) {
       $scope.showTip = true;
     }
 
@@ -17,9 +17,9 @@ angular.module('csyywx')
           $ionicLoading.hide();
           if(+data.flag === 1) {
             if(+data.data.isOldUser) {
-              $state.go('tabs.login', {phone: $scope.user.phone});
+              $state.go('tabs.login', {phone: $scope.user.phone, redirect: $stateParams.inviteCode || $stateParams.userfrom});
             } else {
-              $state.go('tabs.register', {phone: $scope.user.phone, inviteCode: $stateParams.inviteCode});
+              $state.go('tabs.register', {phone: $scope.user.phone, inviteCode: $stateParams.inviteCode || $stateParams.userfrom});
             }
           }
         })

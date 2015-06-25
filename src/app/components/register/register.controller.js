@@ -25,7 +25,12 @@ angular.module('csyywx')
 
     $scope.submit = function() {
     	$ionicLoading.show();
-    	UserApi.register($scope.user).success(function(data) {
+
+      if($stateParams.inviteCode) {
+        $scope.user.userType = 'tiyanjin+wx+1';
+      }
+
+    	UserApi.registerByActivity($scope.user).success(function(data) {
     		$ionicLoading.hide();
     		if(+data.flag === 1) {
     			// save basic info
@@ -40,7 +45,6 @@ angular.module('csyywx')
           if($stateParams.inviteCode) {
             utils.goInfo();
           }
-          
     		} else if(+data.flag === 3) { // invalid vcode
     			$scope.user.invalidVcode = true;
     		} else {
