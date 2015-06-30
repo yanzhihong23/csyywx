@@ -2,7 +2,7 @@
 
 angular.module('csyywx')
 	.service('WechatService', function($http, utils, $rootScope, userConfig, $timeout) {
-		var HOST = 'https://m.nonobank.com';
+		var HOST = utils.host;
 		// wechat
 		var initWxJsApi = function() {
 			$http({

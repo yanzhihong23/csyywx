@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('csyywx', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'ionic', 'angular-md5', 'LocalStorageModule'])
-  // .constant('HOST_URL', 'https://m-test.nonobank.com/nonobank-app')
-	.constant('HOST_URL', 'https://m.nonobank.com/nnapp')
+  .constant('HOST_URL', 'https://m.nonobank.com')
 	.config(function($ionicConfigProvider, localStorageServiceProvider) {
 		$ionicConfigProvider.tabs.position('bottom').style('standard');
     localStorageServiceProvider.setPrefix('csyy');

@@ -1,9 +1,13 @@
 'use strict';
 
 angular.module('csyywx')
-	.factory('utils', function($ionicHistory, $state, $timeout, $ionicPopup) {
+	.factory('utils', function($ionicHistory, $state, $timeout, $ionicPopup, $location, HOST_URL) {
 		return {
 			passwordPattern: /^(?!\d+$|[a-zA-Z]+$|[\W-_]+$)[\s\S]{6,16}$/,
+			host: /nonobank.com/.test($location.host()) ? $location.protocol() + '://' + $location.host() : HOST_URL,
+			getApiServer: function(host) {
+				return host + (/m.nonobank.com/.test(host) ? '/nnapp' : '/nonobank-app');
+			},
 			param: function(obj) {
 				var str = [];
         for(var p in obj) {

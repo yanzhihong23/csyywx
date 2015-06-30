@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('csyywx')
-	.service('AccountApi', function($http, md5, utils, HOST_URL) {
+	.service('AccountApi', function($http, md5, utils) {
 		var v = 'm.nonobank.com/msapi/'+ utils.getDate(),
 				vMd5 = md5.createHash(v),
-				headers = {'Authorization': vMd5,'Content-Type': 'application/x-www-form-urlencoded'};
+				headers = {'Authorization': vMd5,'Content-Type': 'application/x-www-form-urlencoded'},
+				HOST_URL = utils.getApiServer(utils.host);
 
 		// balance info
 		this.getAccountInfo = function(obj) {
